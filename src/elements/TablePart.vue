@@ -1,5 +1,4 @@
 <template>
-
     <table>
         <thead>
             <tr>
@@ -28,7 +27,6 @@
             </tr>
         </tbody>
     </table>
-
 </template>
 
 <script>
