@@ -17,13 +17,6 @@
                     :key="`scroll-table-part-row-item-${i}`">
                     {{ item }}
                 </td>
-                <!-- <td>
-
-                    <div class="vst_avatar v_smallest">
-                        <figure class="vst_avatar_image" :style="{'background-image': `url(${ row.foto })`}"></figure>
-                        <div class="vst_avatar_name">{{ row.naam }}</div>
-                    </div>
-                </td> -->
             </tr>
         </tbody>
     </table>
