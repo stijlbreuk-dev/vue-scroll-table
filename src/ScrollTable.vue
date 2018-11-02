@@ -153,7 +153,7 @@ export default {
     .vst_table {
         width: 100%;
         overflow-x: scroll;
-        td {
+        th {
             min-width: 300px !important;
         }
     }
