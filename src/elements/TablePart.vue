@@ -6,7 +6,7 @@
                     :key="`scroll-table-part-header-${i}`"
                     @click="$emit('sort', i)">
                     {{ header.text }}
-                    <sort-icon v-if="header.sortable" />
+                    <sort-icon v-if="header.sortable" :direction="direction"/>
                 </th>
             </tr>
         </thead>
@@ -27,7 +27,7 @@ import SortIcon from './SortIcon';
 
 export default {
     name: 'table-part',
-    props: ['data', 'headers'],
+    props: ['data', 'headers', 'direction'],
     components: {
         SortIcon
     }

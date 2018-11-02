@@ -92,7 +92,7 @@ export default {
             limit: 0,
             page: 1,
             sortKey: 'naam',
-            direction: 'down'
+            direction: 'descending'
         };
     },
     computed: {
@@ -101,9 +101,9 @@ export default {
             const limitedData = [...this.data]
                 .sort((a, b) => {
                     if (a[this.sortKey] > b[this.sortKey])
-                        return this.direction === 'down' ? -1 : 1;
+                        return this.direction === 'descending' ? -1 : 1;
                     if (a[this.sortKey] < b[this.sortKey])
-                        return this.direction === 'down' ? 1 : -1;
+                        return this.direction === 'descending' ? 1 : -1;
                     return 0;
                 })
                 .filter((row, i) => {
@@ -129,7 +129,7 @@ export default {
             this.page = num;
         },
         sortBy(key) {
-            this.direction = this.direction === 'down' ? 'up' : 'down';
+            this.direction = this.direction === 'descending' ? 'ascending' : 'descending';
             this.sortKey = key;
         },
         handleResize() {
@@ -153,7 +153,7 @@ export default {
     .vst_table {
         width: 100%;
         overflow-x: scroll;
-        td {
+        th {
             min-width: 300px !important;
         }
     }
