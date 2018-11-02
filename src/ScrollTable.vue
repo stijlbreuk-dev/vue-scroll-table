@@ -25,6 +25,17 @@
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
+
+                    <!-- Pass down al slots and scoped slots to child -->
+                    <slot v-for="slot in Object.keys($slots)"
+                          :name="slot"
+                          :slot="slot" />
+                    <template v-for="slot in Object.keys($scopedSlots)"
+                              :slot="slot"
+                              slot-scope="scope">
+                        <slot :name="slot"
+                              v-bind="scope" />
+                    </template>
                 </table-part>
             </div>
             <div class="vst_table-scroll">
@@ -33,6 +44,17 @@
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
+
+                    <!-- Pass down al slots and scoped slots to child -->
+                    <slot v-for="slot in Object.keys($slots)"
+                          :name="slot"
+                          :slot="slot" />
+                    <template v-for="slot in Object.keys($scopedSlots)"
+                              :slot="slot"
+                              slot-scope="scope">
+                        <slot :name="slot"
+                              v-bind="scope" />
+                    </template>
                 </table-part>
             </div>
         </div>
@@ -129,7 +151,8 @@ export default {
             this.page = num;
         },
         sortBy(key) {
-            this.direction = this.direction === 'descending' ? 'ascending' : 'descending';
+            this.direction =
+                this.direction === 'descending' ? 'ascending' : 'descending';
             this.sortKey = key;
         },
         handleResize() {

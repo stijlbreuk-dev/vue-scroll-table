@@ -6,17 +6,27 @@
                     :key="`scroll-table-part-header-${i}`"
                     @click="$emit('sort', i)">
                     {{ header.text }}
-                    <sort-icon v-if="header.sortable" :direction="direction"/>
+                    <sort-icon v-if="header.sortable"
+                               :direction="direction" />
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(row, i) in data"
                 :key="`scroll-table-part-row-${i}`">
-                <td v-for="(item, i) in row"
-                    :key="`scroll-table-part-row-item-${i}`">
-                    {{ item }}
-                </td>
+                <template v-for="(header, i) in headers">
+                    <td v-if="typeof $scopedSlots[header.text.toLowerCase()] !== 'undefined'"
+                        :key="`scroll-table-part-row-item-${i}`">
+                        <slot :name="header.text.toLowerCase()"
+                              :header="header"
+                              :index="i"
+                              :row="row"></slot>
+                    </td>
+                    <td v-else
+                        :key="`scroll-table-part-row-item-${i}`">
+                        {{ row[i] }}
+                    </td>
+                </template>
             </tr>
         </tbody>
     </table>
@@ -30,6 +40,9 @@ export default {
     props: ['data', 'headers', 'direction'],
     components: {
         SortIcon
+    },
+    mounted() {
+        console.log(this.$parent.$scopedSlots);
     }
 };
 </script>
