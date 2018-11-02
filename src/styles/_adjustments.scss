@@ -1,0 +1,59 @@
+@import './util/breakpoints';
+
+//
+// MARGIN
+//
+$margin-list: 0 10 20 40 60 80 100;
+$margin-sides: top right bottom left;
+
+@mixin generate-margin-classes {
+    @each $item in $margin-list {
+        @each $side in $margin-sides {
+            .a_margin-#{$side}-#{$item} {
+                margin-#{$side}: (0px + ($item/2)) !important;
+            }
+        }
+    }
+    @each $item in $margin-list {
+        @each $side in $margin-sides {
+            @include breakpoint(medium) {
+                .a_margin-#{$side}-#{$item} {
+                    margin-#{$side}: (0px + $item) !important;
+                }
+            }
+        }
+    }
+}
+@include generate-margin-classes();
+
+//
+// PADDING
+//
+$padding-list: 0 10 20 40 60 80 100 120 140;
+$padding-sides: top bottom; // top right bottom left;
+
+@mixin generate-padding-classes {
+    @each $item in $padding-list {
+        @each $side in $padding-sides {
+            .a_padding-#{$side}-#{$item} {
+                padding-#{$side}: (0px + ($item/2)) !important;
+            }
+        }
+        @each $side in $padding-sides {
+            @include breakpoint(medium) {
+                .a_padding-#{$side}-#{$item} {
+                    padding-#{$side}: (0px + $item) !important;
+                }
+            }
+        }
+        .a_padding-#{$item} {
+            padding: (0px + ($item/2)) !important;
+        }
+        @include breakpoint(medium) {
+            .a_padding-#{$item} {
+                padding: (0px + $item) !important;
+            }
+        }
+    }
+}
+@include generate-padding-classes();

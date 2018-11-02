@@ -1,0 +1,27 @@
+$breakpoints: (
+  small: 0,
+  medium-portrait: 600px,
+  medium: 800px,
+  large: 1025px,
+  xlarge: 1200px,
+  xxlarge: 1440px,
+);
+
+/// Breakpoints mixin
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin breakpoint($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the supplied breakpoint
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+ 
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "vetur.format.styleInitialIndent": true,
+  "prettier.tabWidth": 4,
+  "html.format.wrapAttributes": "force-aligned"
+}

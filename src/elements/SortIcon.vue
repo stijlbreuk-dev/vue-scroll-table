@@ -1,5 +1,5 @@
 <template>
-    <button class="">
+    <button class="vst_sort-btn">
         ▲ ▼
     </button>
 </template>
