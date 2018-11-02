@@ -19,7 +19,8 @@
         <div class="vst_table"
              :class="{'v_has-scroll': hasScroll}">
             <div class="vst_table-overlay"
-                 v-if="hasScroll">
+                 v-if="hasScroll"
+                 :style="{'max-width': `${headers[0].width}`}">
                 <table-part ref="overlay"
                             @sort="sortBy($event)"
                             :headers="headers"
@@ -114,7 +115,8 @@ export default {
             limit: 0,
             page: 1,
             sortKey: 'naam',
-            direction: 'descending'
+            direction: 'descending',
+            overlayTableWidth: this.headers[0].width
         };
     },
     computed: {
@@ -177,7 +179,7 @@ export default {
         width: 100%;
         overflow-x: scroll;
         th {
-            min-width: 300px !important;
+            // min-width: 300px !important;
         }
     }
 
@@ -185,7 +187,7 @@ export default {
         background-color: white;
         position: absolute;
         overflow: hidden;
-        width: $first-column-width;
+        // width: $first-column-width;
         border-right: 1px solid red;
         &.v_has-scroll {
             display: none;
