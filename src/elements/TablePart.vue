@@ -5,7 +5,7 @@
                 <th v-for="(header, i) in headers"
                     :key="`scroll-table-part-header-${i}`"
                     @click="$emit('sort', i)"
-                    :style="{ 'min-width': `${header.width} !important` }">
+                    :style="{ 'min-width': `${header.width}` }">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
                                :direction="direction" />

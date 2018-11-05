@@ -27,7 +27,7 @@
                             :data="limitedData"
                             :direction="direction">
 
-                    <!-- Pass down al slots and scoped slots to child -->
+                    <!-- Pass down all slots and scoped slots to child -->
                     <slot v-for="slot in Object.keys($slots)"
                           :name="slot"
                           :slot="slot" />
@@ -173,21 +173,19 @@ export default {
 <style lang="scss">
     @import './styles/app.scss';
 
-    $first-column-width: 280px;
+    * {
+        box-sizing: border-box;
+    }
 
     .vst_table {
         width: 100%;
         overflow-x: scroll;
-        th {
-            // min-width: 300px !important;
-        }
     }
 
     .vst_table-overlay {
         background-color: white;
         position: absolute;
         overflow: hidden;
-        // width: $first-column-width;
         border-right: 1px solid red;
         &.v_has-scroll {
             display: none;
