@@ -1,10 +1,10 @@
 <template>
     <button class="vst_sort-btn"
             :class="[...classes.button]">
-        <span :class="getClasses('ascending')">
+        <span :class="this.direction === 'ascending' ? activeClasses : {}">
             ▲
         </span>
-        <span :class="getClasses('descending')">
+        <span :class="this.direction === 'descending' ? activeClasses : {}">
             ▼
         </span>
     </button>
@@ -18,31 +18,25 @@ export default {
         'classes.active': {
             immediate: true,
             handler: function(newActiveClasses) {
-                this.customActiveClasses = newActiveClasses.reduce(
-                    (activeClasses, currentActiveClass) => ({
-                        ...activeClasses,
-                        [currentActiveClass]: true
-                    }),
-                    {}
-                );
+                this.activeClasses = {
+                    s_active: true,
+                    ...newActiveClasses.reduce(
+                        (activeClasses, currentActiveClass) => ({
+                            ...activeClasses,
+                            [currentActiveClass]: true
+                        }),
+                        {}
+                    )
+                };
             }
         }
     },
     data() {
         return {
-            customActiveClasses: {}
-        };
-    },
-    methods: {
-        getClasses(direction) {
-            if (this.direction === direction) {
-                return {
-                    s_active: true,
-                    ...this.customActiveClasses
-                };
+            activeClasses: {
+                s_active: true
             }
-            return {};
-        }
+        };
     }
 };
 </script>
