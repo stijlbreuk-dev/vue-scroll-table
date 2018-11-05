@@ -2,16 +2,9 @@
     <div>
         <scroll-table :headers="headers"
                       :data="rows"
-                      :hasScroll="true">
-            <template slot="occupation"
-                      slot-scope="scope">
-                <p v-for="([key, value], index) in Object.entries(scope)"
-                   :key="`occupation-entry-${index}`">
-                    {{ key }}: {{ value }}
-                </p>
-            </template>
-            <template slot="age"
-                      slot-scope="{ row, header, index }">Age {{ row[index] }}</template>
+                      :hasScroll="true"
+                      :styles="styles"
+                      :classes="classes">
         </scroll-table>
     </div>
 </template>
@@ -147,6 +140,81 @@ export default {
                 ['Paul', 'Designer', '27']
             ]
         };
+    },
+    created() {
+    },
+    computed: {
+        classes() {
+            return {
+                container: ['tables_container'],
+                pagination: {
+                    container: ['pagination-container'],
+                    limit: {
+                        container: ['limitcontainer'],
+                        dropdown: ['limitdropdown']
+                    },
+                    links: {
+                        container: ['linkscontainer'],
+                        buttons: ['linkbutton']
+                    }
+                },
+                sticky: {
+                    container: ['stickycontainer'],
+                    table: ['stickytable'],
+                    tableHeader: ['stickytableheader'],
+                    tableRow: ['stickytablerow'],
+                    tableData: ['stickytabledata']
+                },
+                scroll: {
+                    container: ['scrollcontainer'],
+                    table: ['scrolltable'],
+                    tableHeader: ['scrolltableheader'],
+                    tableRow: ['scrolltablerow'],
+                    tableData: ['scrolltabledata']
+                },
+                sortButtons: {
+                    button: ['sortbutton'],
+                    active: ['activesortbutton']
+                }
+            };
+        },
+        styles() {
+            return {
+                container: {},
+                pagination: {
+                    container: {},
+                    limit: {
+                        container: {},
+                        dropdown: {}
+                    },
+                    links: {
+                        container: {},
+                        buttons: {}
+                    }
+                },
+                sticky: {
+                    container: {},
+                    table: {},
+                    tableHeader: {},
+                    tableRow: {},
+                    tableData: {}
+                },
+                scroll: {
+                    container: {},
+                    table: {},
+                    tableHeader: {
+                        header: {},
+                        sortButton: {}
+                    },
+                    tableRow: {},
+                    tableData: {}
+                },
+                sortButtons: {
+                    button: {},
+                    active: {}
+                }
+            };
+        }
     },
     components: {
         ScrollTable

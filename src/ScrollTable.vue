@@ -1,27 +1,33 @@
 <template>
     <div v-if="data">
-        <div class="vst_pagination a_margin-bottom-20">
-            <div class="vst_pagination_filters a_margin-right-20">
+        <div class="vst_pagination a_margin-bottom-20"
+             :class="[...classes.pagination.container]">
+            <div class="vst_pagination_limit a_margin-right-20"
+                 :class="[...classes.pagination.limit.container]">
                 <select v-model="limit"
-                        class="v_transparent">
+                        class="v_transparent"
+                        :class="[...classes.pagination.limit.dropdown]">
                     <option v-for="(limit, i) in limits"
                             :key="`scroll-table-limit-${i}`"
                             :value="limit">{{limit}} per page</option>
                 </select>
             </div>
-            <div class="vst_pagination_links">
+            <div class="vst_pagination_links"
+                 :class="[...classes.pagination.links.container]">
                 <button v-for="i in pages"
                         :key="`scroll-table-pagination-link-${i}`"
-                        :class="{s_active: i == page }"
+                        :class="[{s_active: i == page }, [...classes.pagination.links.buttons]]"
                         @click="paginate(i)">{{i}}</button>
             </div>
         </div>
-        <div class="vst_table"
-             :class="{'v_has-scroll': hasScroll}">
+        <div class='vst_table'
+             :class="[{'v_has-scroll': hasScroll}, ...classes.container]">
             <div class="vst_table-overlay"
+                 :class="[...classes.sticky.container]"
                  v-if="hasScroll"
                  :style="{'max-width': `${headers[0].width}`}">
                 <table-part ref="overlay"
+                            :classes="mergeObjectProperties(classes.sticky, classes.sortButtons)"
                             @sort="sortBy($event)"
                             :headers="headers"
                             :data="limitedData"
@@ -39,9 +45,11 @@
                     </template>
                 </table-part>
             </div>
-            <div class="vst_table-scroll">
+            <div class="vst_table-scroll"
+                 :class="[...classes.scroll.container]">
                 <table-part ref="scroll"
                             @sort="sortBy($event)"
+                            :classes="mergeObjectProperties(classes.scroll, classes.sortButtons)"
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
@@ -102,6 +110,16 @@ export default {
             default() {
                 return [];
             }
+        },
+        styles: {
+            default() {
+                return {};
+            }
+        },
+        classes: {
+            default() {
+                return {};
+            }
         }
     },
     watch: {
@@ -161,6 +179,16 @@ export default {
             this.$refs.overlay.$el.style.width = `${
                 this.$refs.scroll.$el.offsetWidth
             }px`;
+        },
+        mergeObjectProperties() {
+            const argumentsObjects = [...arguments];
+            return argumentsObjects.reduce(
+                (merged, object) => ({
+                    ...merged,
+                    ...object
+                }),
+                {}
+            );
         }
     },
     components: {
@@ -190,6 +218,7 @@ export default {
         &.v_has-scroll {
             display: none;
         }
+        // TODO: problematisch -> wordt niet toegepast op onderliggende tabel waardoor de overlay tabel minder hoog is dan de onderliggende tabel
         th,
         td {
             min-width: 140px;

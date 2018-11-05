@@ -1,30 +1,35 @@
 <template>
-    <table>
+    <table :class="[...classes.table]">
         <thead>
             <tr>
                 <th v-for="(header, i) in headers"
                     :key="`scroll-table-part-header-${i}`"
                     @click="$emit('sort', i)"
+                    :class="[...classes.tableHeader]"
                     :style="{ 'min-width': `${header.width}` }">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
+                               :classes="{ button: classes.button, active: classes.active}"
                                :direction="direction" />
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(row, i) in data"
-                :key="`scroll-table-part-row-${i}`">
+                :key="`scroll-table-part-row-${i}`"
+                :class="[...classes.tableRow]">
                 <template v-for="(header, i) in headers">
                     <td v-if="typeof $scopedSlots[header.text.toLowerCase()] !== 'undefined'"
-                        :key="`scroll-table-part-row-item-${i}`">
+                        :key="`scroll-table-part-row-item-${i}`"
+                        :class="[...classes.tableData]">
                         <slot :name="header.text.toLowerCase()"
                               :header="header"
                               :index="i"
                               :row="row"></slot>
                     </td>
                     <td v-else
-                        :key="`scroll-table-part-row-item-${i}`">
+                        :key="`scroll-table-part-row-item-${i}`"
+                        :class="[...classes.tableData]">
                         {{ row[i] }}
                     </td>
                 </template>
@@ -38,7 +43,7 @@ import SortIcon from './SortIcon';
 
 export default {
     name: 'table-part',
-    props: ['data', 'headers', 'direction'],
+    props: ['data', 'headers', 'direction', 'classes', 'styles'],
     components: {
         SortIcon
     }

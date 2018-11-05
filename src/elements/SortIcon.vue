@@ -1,9 +1,10 @@
 <template>
-    <button class="vst_sort-btn">
-        <span :class="{ s_active: direction === 'ascending' }">
+    <button class="vst_sort-btn"
+            :class="[...classes.button]">
+        <span :class="getClasses('ascending')">
             ▲
         </span>
-        <span :class="{ s_active: direction === 'descending' }">
+        <span :class="getClasses('descending')">
             ▼
         </span>
     </button>
@@ -11,13 +12,43 @@
 
 <script>
 export default {
-    props: ['direction'],
-    name: 'sort-icon'
+    props: ['classes', 'direction'],
+    name: 'sort-icon',
+    watch: {
+        'classes.active': {
+            immediate: true,
+            handler: function(newActiveClasses) {
+                this.customActiveClasses = newActiveClasses.reduce(
+                    (activeClasses, currentActiveClass) => ({
+                        ...activeClasses,
+                        [currentActiveClass]: true
+                    }),
+                    {}
+                );
+            }
+        }
+    },
+    data() {
+        return {
+            customActiveClasses: {}
+        };
+    },
+    methods: {
+        getClasses(direction) {
+            if (this.direction === direction) {
+                return {
+                    s_active: true,
+                    ...this.customActiveClasses
+                };
+            }
+            return {};
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
     // Opacity & z-index fix for scroll-table sort buttons
-    .vst_table-scroll .vst_sort-btn  {
+    .vst_table-scroll .vst_sort-btn {
         position: relative;
         z-index: -1;
     }
