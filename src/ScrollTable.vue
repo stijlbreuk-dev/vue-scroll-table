@@ -1,22 +1,27 @@
 <template>
     <div v-if="data">
         <div class="vst_pagination a_margin-bottom-20"
-             :class="[...classes.pagination.container]">
+             :class="[...classes.pagination.container]"
+             :style="styles.pagination.container">
             <div class="vst_pagination_limit a_margin-right-20"
-                 :class="[...classes.pagination.limit.container]">
+                 :class="[...classes.pagination.limit.container]"
+                 :style="styles.pagination.limit.container">
                 <select v-model="limit"
                         class="v_transparent"
-                        :class="[...classes.pagination.limit.dropdown]">
+                        :class="[...classes.pagination.limit.dropdown]"
+                        :style="styles.pagination.limit.dropdown">
                     <option v-for="(limit, i) in limits"
                             :key="`scroll-table-limit-${i}`"
                             :value="limit">{{limit}} per page</option>
                 </select>
             </div>
             <div class="vst_pagination_links"
-                 :class="[...classes.pagination.links.container]">
+                 :class="[...classes.pagination.links.container]"
+                 :style="styles.pagination.links.container">
                 <button v-for="i in pages"
                         :key="`scroll-table-pagination-link-${i}`"
                         :class="[{s_active: i == page }, [...classes.pagination.links.buttons]]"
+                        :style="styles.pagination.links.buttons"
                         @click="paginate(i)">{{i}}</button>
             </div>
         </div>

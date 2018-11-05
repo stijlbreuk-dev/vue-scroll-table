@@ -141,12 +141,10 @@ export default {
             ]
         };
     },
-    created() {
-    },
+    created() {},
     computed: {
         classes() {
             return {
-                container: ['tables_container'],
                 pagination: {
                     container: ['pagination-container'],
                     limit: {
@@ -158,6 +156,7 @@ export default {
                         buttons: ['linkbutton']
                     }
                 },
+                container: ['tables_container'],
                 sticky: {
                     container: ['stickycontainer'],
                     table: ['stickytable'],
@@ -180,17 +179,34 @@ export default {
         },
         styles() {
             return {
-                container: {},
                 pagination: {
-                    container: {},
+                    container: {
+                        // 'background-color': 'red',
+                        // border: '1px solid black'
+                    },
                     limit: {
-                        container: {},
-                        dropdown: {}
+                        container: {
+                            // 'background-color': 'red',
+                            // border: '1px solid black'
+                        },
+                        dropdown: {
+                            // 'background-color': 'red',
+                            // border: '1px solid black'
+                        }
                     },
                     links: {
-                        container: {},
-                        buttons: {}
+                        container: {
+                            'background-color': 'red',
+                            border: '1px solid black'
+                        },
+                        buttons: {
+                            'color': 'red',
+                            // border: '1px solid black'
+                        }
                     }
+                },
+                container: {
+                    'background-color': 'red'
                 },
                 sticky: {
                     container: {},
