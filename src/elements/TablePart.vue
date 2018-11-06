@@ -51,9 +51,6 @@ export default {
     props: ['data', 'headers', 'direction', 'classes', 'styles'],
     components: {
         SortIcon
-    },
-    created() {
-        console.log(this.styles);
     }
 };
 </script>
