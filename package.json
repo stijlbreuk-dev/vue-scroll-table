@@ -1,6 +1,6 @@
 {
     "name": "vue-scroll-table",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "A Vue table component with horizontal scrolling and a sticky first column.",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
