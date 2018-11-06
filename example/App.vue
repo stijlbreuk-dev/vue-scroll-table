@@ -200,13 +200,12 @@ export default {
                             border: '1px solid black'
                         },
                         buttons: {
-                            'color': 'red',
+                            color: 'red'
                             // border: '1px solid black'
                         }
                     }
                 },
                 container: {
-                    'background-color': 'red'
                 },
                 sticky: {
                     container: {},
@@ -218,10 +217,7 @@ export default {
                 scroll: {
                     container: {},
                     table: {},
-                    tableHeader: {
-                        header: {},
-                        sortButton: {}
-                    },
+                    tableHeader: {},
                     tableRow: {},
                     tableData: {}
                 },

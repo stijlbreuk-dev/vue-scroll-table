@@ -1,15 +1,17 @@
 <template>
-    <table :class="[...classes.table]">
+    <table :class="[...classes.table]"
+           :style="styles.table">
         <thead>
             <tr>
                 <th v-for="(header, i) in headers"
                     :key="`scroll-table-part-header-${i}`"
                     @click="$emit('sort', i)"
                     :class="[...classes.tableHeader]"
-                    :style="{ 'min-width': `${header.width}` }">
+                    :style="Object.assign({ 'min-width': `${header.width}` }, styles.tableHeader)">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
                                :classes="{ button: classes.button, active: classes.active}"
+                               :styles="{ button: styles.button, active: styles.active }"
                                :direction="direction" />
                 </th>
             </tr>
@@ -17,11 +19,13 @@
         <tbody>
             <tr v-for="(row, i) in data"
                 :key="`scroll-table-part-row-${i}`"
-                :class="[...classes.tableRow]">
+                :class="[...classes.tableRow]"
+                :style="styles.tableRow">
                 <template v-for="(header, i) in headers">
                     <td v-if="typeof $scopedSlots[header.text.toLowerCase()] !== 'undefined'"
                         :key="`scroll-table-part-row-item-${i}`"
-                        :class="[...classes.tableData]">
+                        :class="[...classes.tableData]"
+                        :style="styles.tableData">
                         <slot :name="header.text.toLowerCase()"
                               :header="header"
                               :index="i"
@@ -29,7 +33,8 @@
                     </td>
                     <td v-else
                         :key="`scroll-table-part-row-item-${i}`"
-                        :class="[...classes.tableData]">
+                        :class="[...classes.tableData]"
+                        :style="styles.tableData">
                         {{ row[i] }}
                     </td>
                 </template>
@@ -46,6 +51,9 @@ export default {
     props: ['data', 'headers', 'direction', 'classes', 'styles'],
     components: {
         SortIcon
+    },
+    created() {
+        console.log(this.styles);
     }
 };
 </script>

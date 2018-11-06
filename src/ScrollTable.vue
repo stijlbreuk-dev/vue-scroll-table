@@ -26,14 +26,16 @@
             </div>
         </div>
         <div class='vst_table'
-             :class="[{'v_has-scroll': hasScroll}, ...classes.container]">
+             :class="[{'v_has-scroll': hasScroll}, ...classes.container]"
+             :style="styles.container">
             <div class="vst_table-overlay"
                  :class="[...classes.sticky.container]"
                  v-if="hasScroll"
-                 :style="{'max-width': `${headers[0].width}`}">
+                 :style="Object.assign({'max-width': `${headers[0].width}`}, styles.sticky.container)">
                 <table-part ref="overlay"
-                            :classes="mergeObjectProperties(classes.sticky, classes.sortButtons)"
                             @sort="sortBy($event)"
+                            :classes="Object.assign(classes.sticky, classes.sortButtons)"
+                            :styles="Object.assign(styles.sticky, styles.sortButtons)"
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
@@ -51,10 +53,12 @@
                 </table-part>
             </div>
             <div class="vst_table-scroll"
-                 :class="[...classes.scroll.container]">
+                 :class="[...classes.scroll.container]"
+                 :style="styles.scroll.container">
                 <table-part ref="scroll"
                             @sort="sortBy($event)"
-                            :classes="mergeObjectProperties(classes.scroll, classes.sortButtons)"
+                            :classes="Object.assign(classes.scroll, classes.sortButtons)"
+                            :styles="Object.assign(styles.scroll, styles.sortButtons)"
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
@@ -184,16 +188,6 @@ export default {
             this.$refs.overlay.$el.style.width = `${
                 this.$refs.scroll.$el.offsetWidth
             }px`;
-        },
-        mergeObjectProperties() {
-            const argumentsObjects = [...arguments];
-            return argumentsObjects.reduce(
-                (merged, object) => ({
-                    ...merged,
-                    ...object
-                }),
-                {}
-            );
         }
     },
     components: {

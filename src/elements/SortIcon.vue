@@ -1,10 +1,13 @@
 <template>
     <button class="vst_sort-btn"
-            :class="[...classes.button]">
-        <span :class="this.direction === 'ascending' ? activeClasses : {}">
+            :class="[...classes.button]"
+            :style="styles.button">
+        <span :class="this.direction === 'ascending' ? activeClasses : {}"
+              :style="this.direction === 'ascending' ? activeStyle : {}">
             ▲
         </span>
-        <span :class="this.direction === 'descending' ? activeClasses : {}">
+        <span :class="this.direction === 'descending' ? activeClasses : {}"
+              :style="this.direction === 'descending' ? activeStyle : {}">
             ▼
         </span>
     </button>
@@ -12,30 +15,39 @@
 
 <script>
 export default {
-    props: ['classes', 'direction'],
+    props: ['classes', 'styles', 'direction'],
     name: 'sort-icon',
     watch: {
         'classes.active': {
             immediate: true,
             handler: function(newActiveClasses) {
+                const activateClasses = (activeClasses, currentClass) => ({
+                    ...activeClasses,
+                    [currentClass]: true
+                });
+
                 this.activeClasses = {
-                    s_active: true,
-                    ...newActiveClasses.reduce(
-                        (activeClasses, currentActiveClass) => ({
-                            ...activeClasses,
-                            [currentActiveClass]: true
-                        }),
-                        {}
-                    )
+                    ...this.defaultActiveClasses.reduce(activateClasses, {}),
+                    ...newActiveClasses.reduce(activateClasses, {})
+                };
+            }
+        },
+        'styles.active': {
+            immediate: true,
+            handler: function(newActiveStyles) {
+                this.activeStyle = {
+                    ...this.defaultActiveStyle,
+                    ...newActiveStyles
                 };
             }
         }
     },
     data() {
         return {
-            activeClasses: {
-                s_active: true
-            }
+            defaultActiveClasses: ['s_active'],
+            defaultActiveStyle: {},
+            activeClasses: {},
+            activeStyle: {}
         };
     }
 };
