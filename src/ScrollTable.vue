@@ -26,8 +26,8 @@
             </div>
         </div>
         <div class='vst_table-container'
-             :class="[{'v_has-scroll': hasScroll}, ...mergedClasses.container]"
-             :style="mergedStyles.container">
+             :class="[{'v_has-scroll': hasScroll}, ...mergedClasses.tableContainer]"
+             :style="mergedStyles.tableContainer">
             <div class="vst_table-overlay"
                  :class="[...mergedClasses.sticky.container]"
                  v-if="hasScroll"

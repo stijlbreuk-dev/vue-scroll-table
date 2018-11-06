@@ -158,7 +158,7 @@ export default {
                         buttons: []
                     }
                 },
-                container: [],
+                tableContainer: [],
                 sticky: {
                     container: [],
                     table: [],
@@ -193,7 +193,7 @@ export default {
                         buttons: {}
                     }
                 },
-                container: {
+                tableContainer: {
                 },
                 sticky: {
                     container: {},
