@@ -4,7 +4,8 @@
             <tr>
                 <th v-for="(header, i) in headers"
                     :key="`scroll-table-part-header-${i}`"
-                    @click="$emit('sort', i)">
+                    @click="$emit('sort', i)"
+                    :style="{ 'min-width': `${header.width}` }">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
                                :direction="direction" />
@@ -40,24 +41,21 @@ export default {
     props: ['data', 'headers', 'direction'],
     components: {
         SortIcon
-    },
-    mounted() {
-        console.log(this.$parent.$scopedSlots);
     }
 };
 </script>
 
 <style lang="scss" scoped>
-    $first-column-width: 280px;
+    // $first-column-width: 280px;
     $border-radius: 10px;
     $border-color: #ddd;
 
     th {
         cursor: pointer;
         padding: 20px !important;
-        &:nth-child(1) {
-            width: $first-column-width;
-        }
+        // &:nth-child(1) {
+        //     width: $first-column-width;
+        // }
         border-right: 1px white solid;
     }
 

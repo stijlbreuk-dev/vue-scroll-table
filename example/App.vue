@@ -23,7 +23,8 @@ export default {
             headers: [
                 {
                     text: 'Name',
-                    sortable: true
+                    sortable: true,
+                    width: '500px'
                 },
                 {
                     text: 'Occupation',
