@@ -1,41 +1,41 @@
 <template>
     <div v-if="data">
         <div class="vst_pagination a_margin-bottom-20"
-             :class="[...classes.pagination.container]"
-             :style="styles.pagination.container">
+             :class="[...mergedClasses.pagination.container]"
+             :style="mergedStyles.pagination.container">
             <div class="vst_pagination_limit a_margin-right-20"
-                 :class="[...classes.pagination.limit.container]"
-                 :style="styles.pagination.limit.container">
+                 :class="[...mergedClasses.pagination.limit.container]"
+                 :style="mergedStyles.pagination.limit.container">
                 <select v-model="limit"
                         class="v_transparent"
-                        :class="[...classes.pagination.limit.dropdown]"
-                        :style="styles.pagination.limit.dropdown">
+                        :class="[...mergedClasses.pagination.limit.dropdown]"
+                        :style="mergedStyles.pagination.limit.dropdown">
                     <option v-for="(limit, i) in limits"
                             :key="`scroll-table-limit-${i}`"
                             :value="limit">{{limit}} per page</option>
                 </select>
             </div>
             <div class="vst_pagination_links"
-                 :class="[...classes.pagination.links.container]"
-                 :style="styles.pagination.links.container">
+                 :class="[...mergedClasses.pagination.links.container]"
+                 :style="mergedStyles.pagination.links.container">
                 <button v-for="i in pages"
                         :key="`scroll-table-pagination-link-${i}`"
-                        :class="[{s_active: i == page }, [...classes.pagination.links.buttons]]"
-                        :style="styles.pagination.links.buttons"
+                        :class="[{s_active: i == page }, [...mergedClasses.pagination.links.buttons]]"
+                        :style="mergedStyles.pagination.links.buttons"
                         @click="paginate(i)">{{i}}</button>
             </div>
         </div>
         <div class='vst_table'
-             :class="[{'v_has-scroll': hasScroll}, ...classes.container]"
-             :style="styles.container">
+             :class="[{'v_has-scroll': hasScroll}, ...mergedClasses.container]"
+             :style="mergedStyles.container">
             <div class="vst_table-overlay"
-                 :class="[...classes.sticky.container]"
+                 :class="[...mergedClasses.sticky.container]"
                  v-if="hasScroll"
-                 :style="Object.assign({'max-width': `${headers[0].width}px`}, styles.sticky.container)">
+                 :style="Object.assign({'max-width': `${headers[0].width}px`}, mergedStyles.sticky.container)">
                 <table-part ref="overlay"
                             @sort="sortBy($event)"
-                            :classes="Object.assign(classes.sticky, classes.sortButtons)"
-                            :styles="Object.assign(styles.sticky, styles.sortButtons)"
+                            :classes="Object.assign(mergedClasses.sticky, mergedClasses.sortButtons)"
+                            :styles="Object.assign(mergedStyles.sticky, mergedStyles.sortButtons)"
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
@@ -53,12 +53,12 @@
                 </table-part>
             </div>
             <div class="vst_table-scroll"
-                 :class="[...classes.scroll.container]"
-                 :style="styles.scroll.container">
+                 :class="[...mergedClasses.scroll.container]"
+                 :style="mergedStyles.scroll.container">
                 <table-part ref="scroll"
                             @sort="sortBy($event)"
-                            :classes="Object.assign(classes.scroll, classes.sortButtons)"
-                            :styles="Object.assign(styles.scroll, styles.sortButtons)"
+                            :classes="Object.assign(mergedClasses.scroll, mergedClasses.sortButtons)"
+                            :styles="Object.assign(mergedStyles.scroll, mergedStyles.sortButtons)"
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
@@ -84,6 +84,8 @@
 <script>
 import TablePart from './elements/TablePart';
 import Loader from './elements/Loader';
+
+import { mergeDefaultClasses, mergeDefaultStyle } from './config/defaults.js';
 
 export default {
     name: 'scroll-table',
@@ -120,16 +122,8 @@ export default {
                 return [];
             }
         },
-        styles: {
-            default() {
-                return {};
-            }
-        },
-        classes: {
-            default() {
-                return {};
-            }
-        }
+        styles: Object,
+        classes: Object
     },
     watch: {
         limit() {
@@ -142,7 +136,9 @@ export default {
             limit: 0,
             page: 1,
             sortKey: 'naam',
-            direction: 'descending'
+            direction: 'descending',
+            mergedClasses: mergeDefaultClasses(this.classes),
+            mergedStyles: mergeDefaultStyle(this.styles)
         };
     },
     computed: {
@@ -212,16 +208,9 @@ export default {
         background-color: white;
         position: absolute;
         overflow: hidden;
-        border-right: 1px solid red;
         z-index: 1;
         &.v_has-scroll {
             display: none;
-        }
-        // TODO: problematisch -> wordt niet toegepast op onderliggende tabel waardoor de overlay tabel minder hoog is dan de onderliggende tabel
-        th,
-        td {
-            min-width: 140px;
-            white-space: nowrap;
         }
     }
 

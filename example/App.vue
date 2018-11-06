@@ -177,7 +177,7 @@ export default {
                     button: ['sortbutton'],
                     active: ['activesortbutton']
                 }
-            };
+            }
         },
         styles() {
             return {
