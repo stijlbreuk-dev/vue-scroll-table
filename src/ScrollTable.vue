@@ -1,6 +1,6 @@
 <template>
-    <div v-if="data">
-        <div class="vst_pagination a_margin-bottom-20"
+    <div v-if="data" class="vst_table-component-container">
+        <div class="vst_pagination-container a_margin-bottom-20"
              :class="[...mergedClasses.pagination.container]"
              :style="mergedStyles.pagination.container">
             <div class="vst_pagination_limit a_margin-right-20"
@@ -25,7 +25,7 @@
                         @click="paginate(i)">{{i}}</button>
             </div>
         </div>
-        <div class='vst_table'
+        <div class='vst_table-container'
              :class="[{'v_has-scroll': hasScroll}, ...mergedClasses.container]"
              :style="mergedStyles.container">
             <div class="vst_table-overlay"
@@ -199,7 +199,7 @@ export default {
         box-sizing: border-box;
     }
 
-    .vst_table {
+    .vst_table-container {
         width: 100%;
         overflow-x: scroll;
     }
