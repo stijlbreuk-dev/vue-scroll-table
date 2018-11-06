@@ -5,9 +5,9 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-        "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-scroll-table.umd.js",
-        "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-scroll-table.esm.js",
-        "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-scroll-table.min.js --environment SB_MINIFY"
+        "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-scroll-table.umd.js --environment BUILD:production",
+        "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-scroll-table.esm.js --environment BUILD:production",
+        "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-scroll-table.min.js --environment BUILD:production,SB_MINIFY"
     },
     "main": "dist/vue-scroll-table.umd.js",
     "module": "dist/vue-scroll-table.esm.js",
