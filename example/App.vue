@@ -2,16 +2,9 @@
     <div>
         <scroll-table :headers="headers"
                       :data="rows"
-                      :hasScroll="true">
-            <template slot="occupation"
-                      slot-scope="scope">
-                <p v-for="([key, value], index) in Object.entries(scope)"
-                   :key="`occupation-entry-${index}`">
-                    {{ key }}: {{ value }}
-                </p>
-            </template>
-            <template slot="age"
-                      slot-scope="{ row, header, index }">Age {{ row[index] }}</template>
+                      :hasScroll="true"
+                      :styles="styles"
+                      :classes="classes">
         </scroll-table>
     </div>
 </template>
@@ -24,15 +17,17 @@ export default {
                 {
                     text: 'Name',
                     sortable: true,
-                    width: '500px'
+                    width: 500
                 },
                 {
                     text: 'Occupation',
-                    sortable: true
+                    sortable: true,
+                    width: 300
                 },
                 {
                     text: 'Age',
-                    sortable: true
+                    sortable: true,
+                    width: 300
                 },
                 {
                     text: 'Age',
@@ -147,6 +142,95 @@ export default {
                 ['Paul', 'Designer', '27']
             ]
         };
+    },
+    created() {},
+    computed: {
+        classes() {
+            return {
+                pagination: {
+                    container: ['pagination-container'],
+                    limit: {
+                        container: ['limitcontainer'],
+                        dropdown: ['limitdropdown']
+                    },
+                    links: {
+                        container: ['linkscontainer'],
+                        buttons: ['linkbutton']
+                    }
+                },
+                container: ['tables_container'],
+                sticky: {
+                    container: ['stickycontainer'],
+                    table: ['stickytable'],
+                    tableHeader: ['stickytableheader'],
+                    tableRow: ['stickytablerow'],
+                    tableData: ['stickytabledata']
+                },
+                scroll: {
+                    container: ['scrollcontainer'],
+                    table: ['scrolltable'],
+                    tableHeader: ['scrolltableheader'],
+                    tableRow: ['scrolltablerow'],
+                    tableData: ['scrolltabledata']
+                },
+                sortButtons: {
+                    button: ['sortbutton'],
+                    active: ['activesortbutton']
+                }
+            }
+        },
+        styles() {
+            return {
+                pagination: {
+                    container: {
+                        // 'background-color': 'red',
+                        // border: '1px solid black'
+                    },
+                    limit: {
+                        container: {
+                            // 'background-color': 'red',
+                            // border: '1px solid black'
+                        },
+                        dropdown: {
+                            // 'background-color': 'red',
+                            // border: '1px solid black'
+                        }
+                    },
+                    links: {
+                        container: {
+                            'background-color': 'red',
+                            border: '1px solid black'
+                        },
+                        buttons: {
+                            color: 'red'
+                            // border: '1px solid black'
+                        }
+                    }
+                },
+                container: {
+                },
+                sticky: {
+                    container: {},
+                    table: {},
+                    tableHeader: {},
+                    tableRow: {},
+                    tableData: {}
+                },
+                scroll: {
+                    container: {},
+                    table: {},
+                    tableHeader: {
+                        'background-color': 'red'
+                    },
+                    tableRow: {},
+                    tableData: {}
+                },
+                sortButtons: {
+                    button: {},
+                    active: {}
+                }
+            };
+        }
     },
     components: {
         ScrollTable

@@ -1,28 +1,41 @@
 <template>
     <div v-if="data">
-        <div class="vst_pagination a_margin-bottom-20">
-            <div class="vst_pagination_filters a_margin-right-20">
+        <div class="vst_pagination a_margin-bottom-20"
+             :class="[...mergedClasses.pagination.container]"
+             :style="mergedStyles.pagination.container">
+            <div class="vst_pagination_limit a_margin-right-20"
+                 :class="[...mergedClasses.pagination.limit.container]"
+                 :style="mergedStyles.pagination.limit.container">
                 <select v-model="limit"
-                        class="v_transparent">
+                        class="v_transparent"
+                        :class="[...mergedClasses.pagination.limit.dropdown]"
+                        :style="mergedStyles.pagination.limit.dropdown">
                     <option v-for="(limit, i) in limits"
                             :key="`scroll-table-limit-${i}`"
                             :value="limit">{{limit}} per page</option>
                 </select>
             </div>
-            <div class="vst_pagination_links">
+            <div class="vst_pagination_links"
+                 :class="[...mergedClasses.pagination.links.container]"
+                 :style="mergedStyles.pagination.links.container">
                 <button v-for="i in pages"
                         :key="`scroll-table-pagination-link-${i}`"
-                        :class="{s_active: i == page }"
+                        :class="[{s_active: i == page }, [...mergedClasses.pagination.links.buttons]]"
+                        :style="mergedStyles.pagination.links.buttons"
                         @click="paginate(i)">{{i}}</button>
             </div>
         </div>
-        <div class="vst_table"
-             :class="{'v_has-scroll': hasScroll}">
+        <div class='vst_table'
+             :class="[{'v_has-scroll': hasScroll}, ...mergedClasses.container]"
+             :style="mergedStyles.container">
             <div class="vst_table-overlay"
+                 :class="[...mergedClasses.sticky.container]"
                  v-if="hasScroll"
-                 :style="{'max-width': `${headers[0].width}`}">
+                 :style="Object.assign({'max-width': `${headers[0].width}px`}, mergedStyles.sticky.container)">
                 <table-part ref="overlay"
                             @sort="sortBy($event)"
+                            :classes="Object.assign(mergedClasses.sticky, mergedClasses.sortButtons)"
+                            :styles="Object.assign(mergedStyles.sticky, mergedStyles.sortButtons)"
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
@@ -39,9 +52,13 @@
                     </template>
                 </table-part>
             </div>
-            <div class="vst_table-scroll">
+            <div class="vst_table-scroll"
+                 :class="[...mergedClasses.scroll.container]"
+                 :style="mergedStyles.scroll.container">
                 <table-part ref="scroll"
                             @sort="sortBy($event)"
+                            :classes="Object.assign(mergedClasses.scroll, mergedClasses.sortButtons)"
+                            :styles="Object.assign(mergedStyles.scroll, mergedStyles.sortButtons)"
                             :headers="headers"
                             :data="limitedData"
                             :direction="direction">
@@ -67,6 +84,8 @@
 <script>
 import TablePart from './elements/TablePart';
 import Loader from './elements/Loader';
+
+import { mergeDefaultClasses, mergeDefaultStyle } from './config/defaults.js';
 
 export default {
     name: 'scroll-table',
@@ -102,7 +121,9 @@ export default {
             default() {
                 return [];
             }
-        }
+        },
+        styles: Object,
+        classes: Object
     },
     watch: {
         limit() {
@@ -116,7 +137,8 @@ export default {
             page: 1,
             sortKey: 'naam',
             direction: 'descending',
-            overlayTableWidth: this.headers[0].width
+            mergedClasses: mergeDefaultClasses(this.classes),
+            mergedStyles: mergeDefaultStyle(this.styles)
         };
     },
     computed: {
@@ -186,14 +208,9 @@ export default {
         background-color: white;
         position: absolute;
         overflow: hidden;
-        border-right: 1px solid red;
+        z-index: 1;
         &.v_has-scroll {
             display: none;
-        }
-        th,
-        td {
-            min-width: 140px;
-            white-space: nowrap;
         }
     }
 

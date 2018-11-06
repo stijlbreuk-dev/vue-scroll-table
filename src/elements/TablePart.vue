@@ -1,30 +1,40 @@
 <template>
-    <table>
+    <table :class="[...classes.table]"
+           :style="styles.table">
         <thead>
             <tr>
                 <th v-for="(header, i) in headers"
                     :key="`scroll-table-part-header-${i}`"
                     @click="$emit('sort', i)"
-                    :style="{ 'min-width': `${header.width}` }">
+                    :class="[...classes.tableHeader]"
+                    :style="Object.assign({ 'min-width': `${header.width}px` }, styles.tableHeader)">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
+                               :classes="{ button: classes.button, active: classes.active}"
+                               :styles="{ button: styles.button, active: styles.active }"
                                :direction="direction" />
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(row, i) in data"
-                :key="`scroll-table-part-row-${i}`">
+                :key="`scroll-table-part-row-${i}`"
+                :class="[...classes.tableRow]"
+                :style="styles.tableRow">
                 <template v-for="(header, i) in headers">
                     <td v-if="typeof $scopedSlots[header.text.toLowerCase()] !== 'undefined'"
-                        :key="`scroll-table-part-row-item-${i}`">
+                        :key="`scroll-table-part-row-item-${i}`"
+                        :class="[...classes.tableData]"
+                        :style="styles.tableData">
                         <slot :name="header.text.toLowerCase()"
                               :header="header"
                               :index="i"
                               :row="row"></slot>
                     </td>
                     <td v-else
-                        :key="`scroll-table-part-row-item-${i}`">
+                        :key="`scroll-table-part-row-item-${i}`"
+                        :class="[...classes.tableData]"
+                        :style="styles.tableData">
                         {{ row[i] }}
                     </td>
                 </template>
@@ -38,7 +48,7 @@ import SortIcon from './SortIcon';
 
 export default {
     name: 'table-part',
-    props: ['data', 'headers', 'direction'],
+    props: ['data', 'headers', 'direction', 'classes', 'styles'],
     components: {
         SortIcon
     }
@@ -46,16 +56,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    // $first-column-width: 280px;
     $border-radius: 10px;
     $border-color: #ddd;
 
     th {
         cursor: pointer;
         padding: 20px !important;
-        // &:nth-child(1) {
-        //     width: $first-column-width;
-        // }
         border-right: 1px white solid;
     }
 
