@@ -7,7 +7,7 @@
                     :key="`scroll-table-part-header-${i}`"
                     @click="$emit('sort', i)"
                     :class="[...classes.tableHeader]"
-                    :style="Object.assign({ 'min-width': `${header.width}` }, styles.tableHeader)">
+                    :style="Object.assign({ 'min-width': `${header.width}px` }, styles.tableHeader)">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
                                :classes="{ button: classes.button, active: classes.active}"
@@ -59,16 +59,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    // $first-column-width: 280px;
     $border-radius: 10px;
     $border-color: #ddd;
 
     th {
         cursor: pointer;
         padding: 20px !important;
-        // &:nth-child(1) {
-        //     width: $first-column-width;
-        // }
         border-right: 1px white solid;
     }
 

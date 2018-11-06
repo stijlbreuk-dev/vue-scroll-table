@@ -17,15 +17,17 @@ export default {
                 {
                     text: 'Name',
                     sortable: true,
-                    width: '500px'
+                    width: 500
                 },
                 {
                     text: 'Occupation',
-                    sortable: true
+                    sortable: true,
+                    width: 300
                 },
                 {
                     text: 'Age',
-                    sortable: true
+                    sortable: true,
+                    width: 300
                 },
                 {
                     text: 'Age',
@@ -217,7 +219,9 @@ export default {
                 scroll: {
                     container: {},
                     table: {},
-                    tableHeader: {},
+                    tableHeader: {
+                        'background-color': 'red'
+                    },
                     tableRow: {},
                     tableData: {}
                 },

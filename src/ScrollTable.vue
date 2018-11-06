@@ -31,7 +31,7 @@
             <div class="vst_table-overlay"
                  :class="[...classes.sticky.container]"
                  v-if="hasScroll"
-                 :style="Object.assign({'max-width': `${headers[0].width}`}, styles.sticky.container)">
+                 :style="Object.assign({'max-width': `${headers[0].width}px`}, styles.sticky.container)">
                 <table-part ref="overlay"
                             @sort="sortBy($event)"
                             :classes="Object.assign(classes.sticky, classes.sortButtons)"
@@ -142,8 +142,7 @@ export default {
             limit: 0,
             page: 1,
             sortKey: 'naam',
-            direction: 'descending',
-            overlayTableWidth: this.headers[0].width
+            direction: 'descending'
         };
     },
     computed: {
@@ -214,6 +213,7 @@ export default {
         position: absolute;
         overflow: hidden;
         border-right: 1px solid red;
+        z-index: 1;
         &.v_has-scroll {
             display: none;
         }

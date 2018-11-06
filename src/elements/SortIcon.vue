@@ -56,7 +56,7 @@ export default {
     // Opacity & z-index fix for scroll-table sort buttons
     .vst_table-scroll .vst_sort-btn {
         position: relative;
-        z-index: -1;
+        z-index: 0;
     }
 
     span {
