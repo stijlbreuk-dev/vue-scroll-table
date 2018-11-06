@@ -61,7 +61,7 @@ export default {
 
     th {
         cursor: pointer;
-        padding: 20px !important;
+        padding: 20px;
         border-right: 1px white solid;
     }
 
