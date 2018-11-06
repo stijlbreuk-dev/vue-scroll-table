@@ -5,9 +5,9 @@
             <tr>
                 <th v-for="(header, i) in headers"
                     :key="`scroll-table-part-header-${i}`"
-                    @click="$emit('sort', i)"
+                    @click="onHeaderClick($event, i, header.sortable)"
                     :class="[...classes.tableHeader]"
-                    :style="Object.assign({ 'min-width': `${header.width}px` }, styles.tableHeader)">
+                    :style="Object.assign({ 'min-width': `${header.width}px`, 'cursor': header.sortable ? 'pointer' : 'default' }, styles.tableHeader)">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
                                :classes="{ button: classes.button, active: classes.active}"
@@ -51,6 +51,13 @@ export default {
     props: ['data', 'headers', 'direction', 'classes', 'styles'],
     components: {
         SortIcon
+    },
+    methods: {
+        onHeaderClick($event, index, sortable) {
+            if (sortable) {
+                this.$emit('sort', index);
+            }
+        }
     }
 };
 </script>

@@ -94,8 +94,8 @@ export default {
             this.limit = this.limits[0];
         }
         if (this.hasScroll) {
-            this.handleResize();
             window.addEventListener('resize', this.handleResize);
+            this.$nextTick(this.handleResize)
         }
     },
     beforeDestroy: function() {
