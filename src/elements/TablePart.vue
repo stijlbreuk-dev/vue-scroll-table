@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import SortIcon from './SortIcon';
+import SortIcon from './SortIcon.vue';
 
 export default {
     name: 'table-part',

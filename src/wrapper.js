@@ -5,7 +5,7 @@ import component from './ScrollTable.vue';
 export function install(Vue) {
 	if (install.installed) return;
 	install.installed = true;
-	Vue.component('ScrollTable', component);
+	Vue.component('scroll-table', component);
 }
 
 // Create module definition for Vue.use()

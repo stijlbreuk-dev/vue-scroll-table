@@ -82,8 +82,8 @@
 </template>
 
 <script>
-import TablePart from './elements/TablePart';
-import Loader from './elements/Loader';
+import TablePart from './elements/TablePart.vue';
+import Loader from './elements/Loader.vue';
 
 import { mergeDefaultClasses, mergeDefaultStyle } from './config/defaults.js';
 
