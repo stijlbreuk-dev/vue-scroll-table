@@ -2,9 +2,9 @@
     "headers": [
         { "text": "First name", "sortable": true, "width": 250 },
         { "text": "Last name", "sortable": true, "width": 250 },
-        { "text": "Favorite color", "sortable": false, "width": 250 },
+        { "text": "Favorite color", "sortable": false, "width": 160 },
         { "text": "Email", "sortable": true, "width": 250 },
-        { "text": "Gender", "sortable": true, "width": 250 },
+        { "text": "Gender", "sortable": true, "width": 160 },
         { "text": "Time zone", "sortable": true, "width": 250 },
         { "text": "Country", "sortable": true, "width": 250 },
         { "text": "Company name", "sortable": true, "width": 250 },

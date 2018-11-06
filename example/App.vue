@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <h1>Vue Scroll Table</h1>
-        <p>A Vue table component with fully customizable (HTML) cells, horizontal scrolling and a sticky first column.</p>
+        <p>A Vue table component with fully customizable cells (using HTML), horizontal scrolling and a sticky first column.</p>
         <scroll-table :headers="headers"
                       :data="rows"
                       :hasScroll="true"
