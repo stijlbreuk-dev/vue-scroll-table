@@ -1,7 +1,7 @@
 # Vue Scroll Table
 
 <p align="center">
-  <img src="[RAW GITHUB USER CONTENT LINK]" alt="Example"/>
+  <img src="https://raw.githubusercontent.com/stijlbreuk/vue-scroll-table/master/example/images/vue-scroll-table-basic-example.png" alt="Example"/>
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-A Vue table component with fully customizable cells (using HTML), horizontal scrolling and a sticky first column.
+A Vue table component with fully customizable cells (using HTML), a sticky first column, horizontal scrolling and pagination.
 </p>
 
 # Demo
