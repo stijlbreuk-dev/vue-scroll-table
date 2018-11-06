@@ -148,34 +148,34 @@ export default {
         classes() {
             return {
                 pagination: {
-                    container: ['pagination-container'],
+                    container: [],
                     limit: {
-                        container: ['limitcontainer'],
-                        dropdown: ['limitdropdown']
+                        container: [],
+                        dropdown: []
                     },
                     links: {
-                        container: ['linkscontainer'],
-                        buttons: ['linkbutton']
+                        container: [],
+                        buttons: []
                     }
                 },
-                container: ['tables_container'],
+                container: [],
                 sticky: {
-                    container: ['stickycontainer'],
-                    table: ['stickytable'],
-                    tableHeader: ['stickytableheader'],
-                    tableRow: ['stickytablerow'],
-                    tableData: ['stickytabledata']
+                    container: [],
+                    table: [],
+                    tableHeader: [],
+                    tableRow: [],
+                    tableData: []
                 },
                 scroll: {
-                    container: ['scrollcontainer'],
-                    table: ['scrolltable'],
-                    tableHeader: ['scrolltableheader'],
-                    tableRow: ['scrolltablerow'],
-                    tableData: ['scrolltabledata']
+                    container: [],
+                    table: [],
+                    tableHeader: [],
+                    tableRow: [],
+                    tableData: []
                 },
                 sortButtons: {
-                    button: ['sortbutton'],
-                    active: ['activesortbutton']
+                    button: [],
+                    active: []
                 }
             }
         },
@@ -183,28 +183,14 @@ export default {
             return {
                 pagination: {
                     container: {
-                        // 'background-color': 'red',
-                        // border: '1px solid black'
                     },
                     limit: {
-                        container: {
-                            // 'background-color': 'red',
-                            // border: '1px solid black'
-                        },
-                        dropdown: {
-                            // 'background-color': 'red',
-                            // border: '1px solid black'
-                        }
+                        container: {},
+                        dropdown: {}
                     },
                     links: {
-                        container: {
-                            'background-color': 'red',
-                            border: '1px solid black'
-                        },
-                        buttons: {
-                            color: 'red'
-                            // border: '1px solid black'
-                        }
+                        container: {},
+                        buttons: {}
                     }
                 },
                 container: {
@@ -219,9 +205,7 @@ export default {
                 scroll: {
                     container: {},
                     table: {},
-                    tableHeader: {
-                        'background-color': 'red'
-                    },
+                    tableHeader: {},
                     tableRow: {},
                     tableData: {}
                 },
