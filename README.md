@@ -385,6 +385,7 @@ In a script tag, this loads the component using the global Vue instance.
 
 ## headers
 Properties of a header object.
+
 | Property | Description                                              | Type    | Default | Example                |
 | -------- | -------------------------------------------------------- | ------- | ------- | ---------------------- |
 | text     | The name of the column which is shown in a table header. | String  | -       | { text: 'First name' } |
@@ -395,6 +396,7 @@ Properties of a header object.
 A data entry (or row) can consist of an array containing a value for every column or can consist of a so called data object.
 
 Properties of a data object
+
 | Property   | Description                                                                                                                    | Type | Default | Example                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------ | ---- | ------- | ---------------------------------------------- |
 | value      | The value which is displayed.                                                                                                  | Any  | -       | { value: 'Jane Doe' }                          |
@@ -522,6 +524,7 @@ Slots can be extremely powerful when used in combination with data objects. As y
 | index    | The index of the column the table cell belongs to.                   | Number                                  |
 | row      | The full row object the table cell belongs to.                       | Array [Data objects](##data) or strings |
 | header   | The header object of the column you wanted to customize cells for.   | [Header object](##headers)              |
+
 For more info about scoped slots, check out [Vue's documentation](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
 # Contributing
