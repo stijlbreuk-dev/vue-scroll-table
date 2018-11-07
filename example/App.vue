@@ -5,7 +5,7 @@
         <scroll-table :headers="headers"
                       :data="rows"
                       :hasScroll="true"
-                      :styless="styles"
+                      :styles="styles"
                       :classes="classes">
             <template slot="first name"
                       slot-scope="{ data }">
@@ -40,7 +40,13 @@ export default {
             avatarUrlColumnIndex: 10,
             headers: data.headers,
             rows: data.rows,
-            styles: {},
+            styles: {
+                sticky: {
+                    tableHeader: {
+                        'font-style': 'italic'
+                    }
+                }
+            },
             classes: {
                 tableContainer: ['align-text'],
                 sticky: {

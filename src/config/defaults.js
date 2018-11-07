@@ -23,7 +23,7 @@ const DEFAULT_CLASSES = {
     scroll: {
         container: [],
         table: [],
-        tableHeader: [''],
+        tableHeader: [],
         tableRow: [],
         tableData: []
     },

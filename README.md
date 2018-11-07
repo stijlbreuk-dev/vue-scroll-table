@@ -38,32 +38,32 @@ npm install --save vue-scroll-table
 ES6 modules, we recommend checking out the CodeSandbox example!
 ```HTML
 <template>
-    <div id="app">
-        <h1>Vue Scroll Table</h1>
-        <p>A Vue table component with fully customizable cells (using scoped slots), a sticky first column, horizontal scrolling and pagination.</p>
-        <scroll-table :headers="headers"
-                      :data="rows"
-                      :hasScroll="true"
-                      :styless="styles"
-                      :classes="classes">
-            <template slot="first name"
-                      slot-scope="{ row, header, index }">
-                <img :src="row[index].attributes.avatarUrl" />
-                <span>
-                    {{ row[index].value }}
-                </span>
-            </template>
-            <template slot="favorite color"
-                      slot-scope="{ row, index }">
-                <svg width="20"
-                     height="20">
-                    <rect width="20"
-                          height="20"
-                          :style="`fill:${row[index]};`"></rect>
-                </svg>
-            </template>
-        </scroll-table>
-    </div>
+  <div id="app">
+    <h1>Vue Scroll Table</h1>
+    <p>A Vue table component with fully customizable cells (using scoped slots), a sticky first column, horizontal scrolling and pagination.</p>
+    <scroll-table :headers="headers"
+                  :data="rows"
+                  :hasScroll="true"
+                  :styles="styles"
+                  :classes="classes">
+      <template slot="first name"
+                slot-scope="{ data }">
+        <img :src="data.attributes.avatarUrl" />
+        <span>
+          {{ data.value }}
+        </span>
+      </template>
+      <template slot="favorite color"
+                slot-scope="{ data }">
+        <svg width="20"
+             height="20">
+          <rect width="20"
+                height="20"
+                :style="`fill:${data};`"></rect>
+        </svg>
+      </template>
+    </scroll-table>
+  </div>
 </template>
 <script>
 import ScrollTable from "vue-scroll-table";
@@ -305,7 +305,13 @@ export default {
       avatarUrlColumnIndex: 10,
       headers: data.headers,
       rows: data.rows,
-      styles: {},
+      styles: {
+        sticky: {
+          tableHeader: {
+              'font-style': 'italic'
+          }
+        }
+      },
       classes: {
         tableContainer: ["align-text"],
         sticky: {
@@ -374,8 +380,8 @@ In a script tag, this loads the component using the global Vue instance.
 | hasScroll | Whether or not the table will be scrollable                          | Boolean                                                 | false          | :hasScroll="false"                                                                         |
 | headers   | The headers (or columns) for your table.                             | [Header object](##headers) array                        | []             | :headers="headers" <br/> :headers="[{ text: 'First name', sortable: true, width: 250 }]"   |
 | data      | The data (or rows) that should be displayed in your table.           | Array of nested [Data objects](##data) or String arrays | []             | :data="data" <br/> :data="[{ value: 'Jane', attributes: { avatarUrl: 'url-to-avatar' } }]" |
-| styles    | The CSS styles you want to apply to specific elements in the table.  | [Vue Scroll Table Style object](##styles)               | {}             | :styles="styles"                                                                           |
 | classes   | The CSS classes you want to apply to specific elements in the table. | [Vue Scroll Table classes object](##classes)            | {}             | :classes="classes"                                                                         |
+| styles    | The CSS styles you want to apply to specific elements in the table.  | [Vue Scroll Table Style object](##styles)               | {}             | :styles="styles"                                                                           |
 
 ## headers
 Properties of a header object.
@@ -394,16 +400,101 @@ Properties of a data object
 | value      | The value which is displayed.                                                                                                  | Any  | -       | { value: 'Jane Doe' }                          |
 | attributes | An object in which custom data for a cell can be saved, useful when using slots to customize cells of a specific table column. | Any  | -       | { attributes: { avatarUrl: 'url-to-avatar' } } |
 
-## styles
+## Classes & styles
+The 'classes' and 'styles' objects can be used to change the look of the Vue Scroll Table. Both objects allow the same properties.
 
+### classes
+In the classes object, CSS classes for different parts of the table can be specified. Using the classes object is recommended when you want to apply your own static styling to the table or when you want to override the basic styling that is applied by default.
 
-## classes
+Every property accepts an array of CSS class names (without a dot).
+
+```JavaScript
+const classes = {
+  // Pagination classes
+  pagination: {
+      container: [],
+      limit: {
+          container: [],
+          dropdown: []
+      },
+      // Numbered pagination buttons
+      links: {
+          container: [],
+          buttons: []
+      }
+  },
+  // The container element in which both the 'sticky' column table and the underlying 'scroll' table can be found
+  tableContainer: ["align-text"],
+  sticky: {
+      container: ["sticky-column"],
+      table: [],
+      tableHeader: ["header-padding"],
+      tableRow: [],
+      tableData: ["table-cell"]
+  },
+  scroll: {
+      container: [],
+      table: [],
+      tableHeader: ["header-padding"],
+      tableRow: [],
+      tableData: ["table-cell"]
+  },
+  // Classes for the sort buttons which can be found in the table headers
+  sortButtons: {
+      button: [],
+      active: []
+  }
+}
+```
+
+### styles
+In the styles object, CSS styles for different parts of the table can be specified. You might want to use the styles object when you want dynamically / reactively change the style of (a part) of the table.
+
+Every property accepts an object which can contain any CSS style rule.
+
+```JavaScript
+const styles = {
+  // Pagination classes
+  pagination: {
+      container: {},
+      limit: {
+          container: {},
+          dropdown: {}
+      },
+      // Numbered pagination buttons
+      links: {
+          container: {},
+          buttons: {}
+      }
+  },
+  // The container element in which both the 'sticky' column table and the underlying 'scroll' table can be found
+  tableContainer: {},
+  sticky: {
+      container: {},
+      table: {},
+      tableHeader: {
+        'font-style': 'italic'
+      },
+      tableRow: {},
+      tableData: {}
+  },
+  scroll: {
+      container: {},
+      table: {},
+      tableHeader: {},
+      tableRow: {},
+      tableData: {}
+  },
+  // Classes for the sort buttons which can be found in the table headers
+  sortButtons: {
+      button: {},
+      active: {}
+  }
+}
+```
 
 # Events
-The Vue Scroll Table element doesn't emit any events.
-| Event | Description | Event parameters |
-| ----- | ----------- | ---------------- |
-| -     | -           | -                |
+The Vue Scroll Table doesn't emit any events.
 
 # Slots
 
@@ -431,7 +522,7 @@ Slots can be extremely powerful when used in combination with data objects. As y
 | index    | The index of the column the table cell belongs to.                   | Number                                  |
 | row      | The full row object the table cell belongs to.                       | Array [Data objects](##data) or strings |
 | header   | The header object of the column you wanted to customize cells for.   | [Header object](##headers)              |
-For more info about scoped slots, checkout [Vue's documentation](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
+For more info about scoped slots, check out [Vue's documentation](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
 # Contributing
 
