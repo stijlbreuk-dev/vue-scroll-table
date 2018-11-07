@@ -5,22 +5,22 @@
         <scroll-table :headers="headers"
                       :data="rows"
                       :hasScroll="true"
-                      :styless="styles"
+                      :styles="styles"
                       :classes="classes">
             <template slot="first name"
-                      slot-scope="{ row, header, index }">
-                <img :src="row[index].attributes.avatarUrl" />
+                      slot-scope="{ data }">
+                <img :src="data.attributes.avatarUrl" />
                 <span>
-                    {{ row[index].value }}
+                    {{ data.value }}
                 </span>
             </template>
             <template slot="favorite color"
-                      slot-scope="{ row, index }">
+                      slot-scope="{ data }">
                 <svg width="20"
                      height="20">
                     <rect width="20"
                           height="20"
-                          :style="`fill:${row[index]};`"></rect>
+                          :style="`fill:${data};`"></rect>
                 </svg>
             </template>
         </scroll-table>
@@ -40,7 +40,13 @@ export default {
             avatarUrlColumnIndex: 10,
             headers: data.headers,
             rows: data.rows,
-            styles: {},
+            styles: {
+                sticky: {
+                    tableHeader: {
+                        'font-style': 'italic'
+                    }
+                }
+            },
             classes: {
                 tableContainer: ['align-text'],
                 sticky: {

@@ -12,8 +12,8 @@
         },
         {
             "text": "Favorite color",
-            "sortable": true,
-            "width": 250
+            "sortable": false,
+            "width": 160
         },
         {
             "text": "Email",
@@ -23,7 +23,7 @@
         {
             "text": "Gender",
             "sortable": true,
-            "width": 250
+            "width": 170
         },
         {
             "text": "Time zone",
