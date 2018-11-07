@@ -12,7 +12,7 @@ const DEFAULT_CLASSES = {
             buttons: []
         }
     },
-    container: [],
+    tableContainer: [],
     sticky: {
         container: [],
         table: [],
@@ -45,7 +45,7 @@ const DEFAULT_STYLES = {
             buttons: {}
         }
     },
-    container: {},
+    tableContainer: {},
     sticky: {
         container: {},
         table: {},

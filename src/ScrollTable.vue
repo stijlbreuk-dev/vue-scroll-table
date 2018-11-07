@@ -1,6 +1,7 @@
 <template>
-    <div v-if="data">
-        <div class="vst_pagination a_margin-bottom-20"
+    <div v-if="data"
+         class="vst_table-component-container">
+        <div class="vst_pagination-container a_margin-bottom-20"
              :class="[...mergedClasses.pagination.container]"
              :style="mergedStyles.pagination.container">
             <div class="vst_pagination_limit a_margin-right-20"
@@ -25,9 +26,9 @@
                         @click="paginate(i)">{{i}}</button>
             </div>
         </div>
-        <div class='vst_table'
-             :class="[{'v_has-scroll': hasScroll}, ...mergedClasses.container]"
-             :style="mergedStyles.container">
+        <div class='vst_table-container'
+             :class="[{'v_has-scroll': hasScroll}, ...mergedClasses.tableContainer]"
+             :style="mergedStyles.tableContainer">
             <div class="vst_table-overlay"
                  :class="[...mergedClasses.sticky.container]"
                  v-if="hasScroll"
@@ -82,8 +83,8 @@
 </template>
 
 <script>
-import TablePart from './elements/TablePart';
-import Loader from './elements/Loader';
+import TablePart from './elements/TablePart.vue';
+import Loader from './elements/Loader.vue';
 
 import { mergeDefaultClasses, mergeDefaultStyle } from './config/defaults.js';
 
@@ -94,9 +95,9 @@ export default {
             this.limit = this.limits[0];
         }
         if (this.hasScroll) {
-            this.handleResize();
             window.addEventListener('resize', this.handleResize);
         }
+        this.$nextTick(this.handleResize);
     },
     beforeDestroy: function() {
         if (this.hasScroll) {
@@ -105,6 +106,7 @@ export default {
     },
     props: {
         limits: {
+            type: Array,
             default: function defaultValue() {
                 return [25, 50, 100];
             }
@@ -122,8 +124,18 @@ export default {
                 return [];
             }
         },
-        styles: Object,
-        classes: Object
+        styles: {
+            type: Object,
+            default() {
+                return mergeDefaultStyle({});
+            }
+        },
+        classes: {
+            type: Object,
+            default() {
+                return mergeDefaultClasses({});
+            }
+        }
     },
     watch: {
         limit() {
@@ -199,7 +211,7 @@ export default {
         box-sizing: border-box;
     }
 
-    .vst_table {
+    .vst_table-container {
         width: 100%;
         overflow-x: scroll;
     }

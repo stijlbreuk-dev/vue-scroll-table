@@ -5,9 +5,9 @@
             <tr>
                 <th v-for="(header, i) in headers"
                     :key="`scroll-table-part-header-${i}`"
-                    @click="$emit('sort', i)"
+                    @click="onHeaderClick($event, i, header.sortable)"
                     :class="[...classes.tableHeader]"
-                    :style="Object.assign({ 'min-width': `${header.width}px` }, styles.tableHeader)">
+                    :style="Object.assign({ 'min-width': `${header.width}px`, 'cursor': header.sortable ? 'pointer' : 'default' }, styles.tableHeader)">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
                                :classes="{ button: classes.button, active: classes.active}"
@@ -35,7 +35,7 @@
                         :key="`scroll-table-part-row-item-${i}`"
                         :class="[...classes.tableData]"
                         :style="styles.tableData">
-                        {{ row[i] }}
+                        {{ getCellDisplayValue(row[i]) }}
                     </td>
                 </template>
             </tr>
@@ -44,13 +44,33 @@
 </template>
 
 <script>
-import SortIcon from './SortIcon';
+import SortIcon from './SortIcon.vue';
 
 export default {
     name: 'table-part',
     props: ['data', 'headers', 'direction', 'classes', 'styles'],
     components: {
         SortIcon
+    },
+    methods: {
+        onHeaderClick($event, index, sortable) {
+            if (sortable) {
+                this.$emit('sort', index);
+            }
+        },
+        getCellDisplayValue(cellData) {
+            if (typeof cellData === 'object') {
+                if (Object.keys(cellData).includes('value')) {
+                    return cellData.value;
+                }
+                console.log(
+                    "Cell data object should have a 'value' property, cell data:",
+                    cellData
+                );
+                return cellData;
+            }
+            return cellData;
+        }
     }
 };
 </script>
@@ -61,7 +81,7 @@ export default {
 
     th {
         cursor: pointer;
-        padding: 20px !important;
+        padding: 20px;
         border-right: 1px white solid;
     }
 
