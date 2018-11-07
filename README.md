@@ -166,10 +166,10 @@ In a script tag, this loads the component using the global Vue instance.
 | ------------ | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------ |
 | limits       | The amount of rows a user can choose to show at once.                                                                   | Number array                                            | [ 25, 50, 100] | :limits="[ 5, 10, 25]"                                                                     |
 | hasScroll    | Whether or not the table will be scrollable                                                                             | Boolean                                                 | false          | :hasScroll="false"                                                                         |
-| headers      | The headers (or columns) for your table.                                                                                | [Header object](##headers) array                        | []             | :headers="headers" <br/> :headers="[{ text: 'First name', sortable: true, width: 250 }]"   |
-| data         | The data (or rows) that should be displayed in your table.                                                              | Array of nested [Data objects](##data) or String arrays | []             | :data="data" <br/> :data="[{ value: 'Jane', attributes: { avatarUrl: 'url-to-avatar' } }]" |
-| classes      | The CSS classes you want to apply to specific elements in the table.                                                    | [Vue Scroll Table classes object](##classes)            | {}             | :classes="classes"                                                                         |
-| styles       | The CSS styles you want to apply to specific elements in the table.                                                     | [Vue Scroll Table Style object](##styles)               | {}             | :styles="styles"                                                                           |
+| headers      | The headers (or columns) for your table.                                                                                | [Header object](#headers) array                        | []             | :headers="headers" <br/> :headers="[{ text: 'First name', sortable: true, width: 250 }]"   |
+| data         | The data (or rows) that should be displayed in your table.                                                              | Array of nested [Data objects](#data) or String arrays | []             | :data="data" <br/> :data="[{ value: 'Jane', attributes: { avatarUrl: 'url-to-avatar' } }]" |
+| classes      | The CSS classes you want to apply to specific elements in the table.                                                    | [Vue Scroll Table classes object](#classes)            | {}             | :classes="classes"                                                                         |
+| styles       | The CSS styles you want to apply to specific elements in the table.                                                     | [Vue Scroll Table Style object](#styles)               | {}             | :styles="styles"                                                                           |
 | translations | Translations for certain labels in the table. The only label that exists right now is the label in the 'limit' dropdown | Object                                                  | { limit:  'per page' }     | :translations="{ limit: 'per pagina' }"                                                                           |
 
 ## headers
@@ -309,10 +309,10 @@ Slots can be extremely powerful when used in combination with data objects. As y
 ## Slot scope
 | Property | Description                                                          | Type                                    |
 | -------- | -------------------------------------------------------------------- | --------------------------------------- |
-| data     | The data object or a string containing the value for the table cell. | [Data object](##data) or string         |
+| data     | The data object or a string containing the value for the table cell. | [Data object](#data) or string         |
 | index    | The index of the column the table cell belongs to.                   | Number                                  |
-| row      | The full row object the table cell belongs to.                       | Array [Data objects](##data) or strings |
-| header   | The header object of the column you wanted to customize cells for.   | [Header object](##headers)              |
+| row      | The full row object the table cell belongs to.                       | Array [Data objects](#data) or strings |
+| header   | The header object of the column you wanted to customize cells for.   | [Header object](#headers)              |
 
 For more info about scoped slots, check out [Vue's documentation](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots).
 
