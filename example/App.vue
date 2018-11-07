@@ -6,7 +6,8 @@
                       :data="rows"
                       :hasScroll="true"
                       :styles="styles"
-                      :classes="classes">
+                      :classes="classes"
+                      :translations="{ limit: 'per page'}">
             <template slot="first name"
                       slot-scope="{ data }">
                 <img :src="data.attributes.avatarUrl" />

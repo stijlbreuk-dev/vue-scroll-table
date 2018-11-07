@@ -13,7 +13,7 @@
                         :style="mergedStyles.pagination.limit.dropdown">
                     <option v-for="(limit, i) in limits"
                             :key="`scroll-table-limit-${i}`"
-                            :value="limit">{{limit}} per page</option>
+                            :value="limit">{{limit}} {{ translations.limit }}</option>
                 </select>
             </div>
             <div class="vst_pagination_links"
@@ -134,6 +134,14 @@ export default {
             type: Object,
             default() {
                 return mergeDefaultClasses({});
+            }
+        },
+        translations: {
+            type: Object,
+            default() {
+                return {
+                    limit: 'per page'
+                }
             }
         }
     },
