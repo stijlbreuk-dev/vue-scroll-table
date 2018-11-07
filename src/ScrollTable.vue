@@ -156,14 +156,30 @@ export default {
     computed: {
         limitedData() {
             const vue = this;
-            const limitedData = [...this.data]
-                .sort((a, b) => {
+
+            const sortCallback = (() => {
+                if (typeof this.data[0][this.sortKey] === 'object') {
+                    // Sort callback for row array with data objects
+                    return (a, b) => {
+                        if (a[this.sortKey].value > b[this.sortKey].value)
+                            return this.direction === 'descending' ? -1 : 1;
+                        if (a[this.sortKey].value < b[this.sortKey].value)
+                            return this.direction === 'descending' ? 1 : -1;
+                        return 0;
+                    };
+                }
+                // Sort callback for row array with simple string values
+                return (a, b) => {
                     if (a[this.sortKey] > b[this.sortKey])
                         return this.direction === 'descending' ? -1 : 1;
                     if (a[this.sortKey] < b[this.sortKey])
                         return this.direction === 'descending' ? 1 : -1;
                     return 0;
-                })
+                };
+            })();
+
+            const limitedData = [...this.data]
+                .sort(sortCallback)
                 .filter((row, i) => {
                     if (
                         i >= (vue.page - 1) * vue.limit &&
