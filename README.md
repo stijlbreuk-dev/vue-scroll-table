@@ -1,7 +1,7 @@
 # Vue Scroll Table
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/stijlbreuk/vue-scroll-table/master/example/images/vue-scroll-table-basic-example.png" alt="Example"/>
+  <img src="https://raw.githubusercontent.com/stijlbreuk/vue-scroll-table/master/example/images/vue-scroll-table-basic-example.gif" alt="Example"/>
 </p>
 
 <p align="center">
