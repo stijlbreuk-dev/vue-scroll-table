@@ -29,6 +29,7 @@
                         <slot :name="header.text.toLowerCase()"
                               :header="header"
                               :index="i"
+                              :data="row[i]"
                               :row="row"></slot>
                     </td>
                     <td v-else
