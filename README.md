@@ -91,7 +91,6 @@ ES6 modules, we recommend checking out the CodeSandbox example!
     },
     data() {
       return {
-        avatarUrlColumnIndex: 10,
         headers: null,
         rows: null,
         styles: {
