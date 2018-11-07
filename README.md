@@ -41,7 +41,8 @@ ES6 modules, we recommend checking out the CodeSandbox example!
   <div id="app">
     <h1>Vue Scroll Table</h1>
     <p>A Vue table component with fully customizable cells (using scoped slots), a sticky first column, horizontal scrolling and pagination.</p>
-    <scroll-table :headers="headers"
+    <scroll-table v-if="headers && rows"
+                  :headers="headers"
                   :data="rows"
                   :hasScroll="true"
                   :styles="styles"
