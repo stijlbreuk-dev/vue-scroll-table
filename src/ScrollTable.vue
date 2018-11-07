@@ -1,5 +1,6 @@
 <template>
-    <div v-if="data" class="vst_table-component-container">
+    <div v-if="data"
+         class="vst_table-component-container">
         <div class="vst_pagination-container a_margin-bottom-20"
              :class="[...mergedClasses.pagination.container]"
              :style="mergedStyles.pagination.container">
@@ -95,8 +96,8 @@ export default {
         }
         if (this.hasScroll) {
             window.addEventListener('resize', this.handleResize);
-            this.$nextTick(this.handleResize)
         }
+        this.$nextTick(this.handleResize);
     },
     beforeDestroy: function() {
         if (this.hasScroll) {
@@ -105,6 +106,7 @@ export default {
     },
     props: {
         limits: {
+            type: Array,
             default: function defaultValue() {
                 return [25, 50, 100];
             }
@@ -122,8 +124,18 @@ export default {
                 return [];
             }
         },
-        styles: Object,
-        classes: Object
+        styles: {
+            type: Object,
+            default() {
+                return mergeDefaultStyle({});
+            }
+        },
+        classes: {
+            type: Object,
+            default() {
+                return mergeDefaultClasses({});
+            }
+        }
     },
     watch: {
         limit() {

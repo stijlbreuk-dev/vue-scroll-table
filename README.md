@@ -19,8 +19,7 @@
 </p>
 
 <p align="center">
-A Vue table component with fully customizable cells (using HTML), a sticky first column, horizontal scrolling and pagination.
-</p>
+A Vue table component with fully customizable cells (using scoped slots), a sticky first column, horizontal scrolling and pagination.</p>
 
 # Demo
 ## Basic
@@ -269,12 +268,24 @@ In a script tag, this loads the component using the global Vue instance.
 # Properties
 | Property      | Description          | Type                       | Default       | Example                   |
 | ------------- | -------------------- | -------------------------- | ------------- | ------------------------- |
-| PROPERTY NAME | PROPERTY DESCRIPTION | EXPECTED PROPERTY DATATYPE | DEFAULT VALUE | USAGE LIKE (:width="400") |
+| headers | The headers (or columns) for your table. | EXPECTED PROPERTY DATATYPE | DEFAULT VALUE | USAGE LIKE (:width="400") |
 
 # Events
 | Event        | Description         | Event parameters                               |
 | ------------ | ------------------- | ---------------------------------------------- |
 | [EVENT NAME] | [EVENT DESCRIPTION] | [EVENT PARAMETER NAME]: Datatype (description) |
+
+# Slots
+
+Slots can be used to customize cells of a specific column. A use case for slots can be seen in de basic CodePen example where slots are used to display an avatar for in the 'first name' column of a person.
+
+The name of a slot should correspond with the lowercase text of one of the table headers.
+
+## Slot scope
+| Property             | Description        | Type              |
+| -------------------- | ------------------ | ----------------- |
+| [Slot property name] | [Slot description] | [Slot value type] |
+
 
 # Contributing
 
