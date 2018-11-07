@@ -9,9 +9,9 @@
                       :classes="classes">
             <template slot="first name"
                       slot-scope="{ row, header, index }">
-                <img :src="row[avatarUrlColumnIndex]" />
+                <img :src="row[index].attributes.avatarUrl" />
                 <span>
-                    {{ row[index] }}
+                    {{ row[index].value }}
                 </span>
             </template>
             <template slot="favorite color"

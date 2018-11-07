@@ -35,7 +35,7 @@
                         :key="`scroll-table-part-row-item-${i}`"
                         :class="[...classes.tableData]"
                         :style="styles.tableData">
-                        {{ row[i] }}
+                        {{ getCellDisplayValue(row[i]) }}
                     </td>
                 </template>
             </tr>
@@ -57,6 +57,19 @@ export default {
             if (sortable) {
                 this.$emit('sort', index);
             }
+        },
+        getCellDisplayValue(cellData) {
+            if (typeof cellData === 'object') {
+                if (Object.keys(cellData).includes('value')) {
+                    return cellData.value;
+                }
+                console.log(
+                    "Cell data object should have a 'value' property, cell data:",
+                    cellData
+                );
+                return cellData;
+            }
+            return cellData;
         }
     }
 };
