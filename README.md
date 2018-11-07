@@ -66,267 +66,55 @@ ES6 modules, we recommend checking out the CodeSandbox example!
   </div>
 </template>
 <script>
-import ScrollTable from "vue-scroll-table";
+  import ScrollTable from "vue-scroll-table";
 
-const data = {
-  headers: [
-    {
-      "text": "First name",
-      "sortable": true,
-      "width": 250
-    },
-    {
-      "text": "Last name",
-      "sortable": true,
-      "width": 250
-    },
-    {
-      "text": "Favorite color",
-      "sortable": false,
-      "width": 160
-    },
-    {
-      "text": "Email",
-      "sortable": true,
-      "width": 250
-    },
-    {
-      "text": "Gender",
-      "sortable": true,
-      "width": 160
-    },
-    {
-      "text": "Time zone",
-      "sortable": true,
-      "width": 250
-    },
-    {
-      "text": "Country",
-      "sortable": true,
-      "width": 250
-    },
-    {
-      "text": "Company name",
-      "sortable": true,
-      "width": 250
-    },
-    {
-      "text": "University",
-      "sortable": true,
-      "width": 250
-    },
-    {
-      "text": "Favorite movie",
-      "sortable": true,
-      "width": 250
-    }
-  ],
-  "rows": [
-    [
-      {
-        "value": "Clementia",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/nihilsuscipitpossimus.png?size=50x50&set=set1"
-        }
-      },
-      "Beresford",
-      "#c7b",
-      "cberesford0@prweb.com",
-      "Female",
-      "America/Guatemala",
-      "Guatemala",
-      "Airbnb",
-      "Centro Universitario de Occidente",
-      "Brain Dead"
-    ],
-    [
-      {
-        "value": "Joaquin",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/molestiaequaeratdolor.bmp?size=50x50&set=set1"
-        }
-      },
-      "Shoebotham",
-      "#840",
-      "jshoebotham1@ocn.ne.jp",
-      "Male",
-      "Asia/Yekaterinburg",
-      "Russia",
-      "Airbnb",
-      "Nizhny Novgorod State Architectural - Building University",
-      "Afterburn"
-    ],
-    [
-      {
-        "value": "Otes",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/estveritatisnon.png?size=50x50&set=set1"
-        }
-      },
-      "Cheng",
-      "#aa7",
-      "ocheng2@about.me",
-      "Male",
-      "Africa/Johannesburg",
-      "South Africa",
-      "Airbnb",
-      "Walter Sisulu University for Technology and Science",
-      "Dead Man"
-    ],
-    [
-      {
-        "value": "Sharyl",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/quasvoluptatespossimus.jpg?size=50x50&set=set1"
-        }
-      },
-      "Muskett",
-      "#686",
-      "smuskett3@360.cn",
-      "Female",
-      "America/Mexico_City",
-      "Mexico",
-      "Amazon",
-      "Instituto Tecnologico de Minatitlan",
-      "Dear Me"
-    ],
-    [
-      {
-        "value": "Gwenore",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/eligendimodinam.bmp?size=50x50&set=set1"
-        }
-      },
-      "Ruspine",
-      "#d96",
-      "gruspine4@ycombinator.com",
-      "Female",
-      "America/New_York",
-      "United States",
-      "Airbnb",
-      "University of Southern Maine",
-      "Miracle in Milan (Miracolo a Milano)"
-    ],
-    [
-      {
-        "value": "Ewell",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/uteumdolorem.bmp?size=50x50&set=set1"
-        }
-      },
-      "Kerfoot",
-      "#ae5",
-      "ekerfoot5@wp.com",
-      "Male",
-      "Asia/Manila",
-      "Philippines",
-      "Uber",
-      "New Era University",
-      "Mrs. Dalloway"
-    ],
-    [
-      {
-        "value": "Ibby",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/etametofficiis.bmp?size=50x50&set=set1"
-        }
-      },
-      "Kobpa",
-      "#962",
-      "ikobpa6@webs.com",
-      "Female",
-      "Asia/Manila",
-      "Philippines",
-      "Airbnb",
-      "Ateneo de Zamboanga University",
-      "Hangman's Curse"
-    ],
-    [
-      {
-        "value": "Sholom",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/etvoluptatesquam.png?size=50x50&set=set1"
-        }
-      },
-      "Trew",
-      "#f32",
-      "strew7@booking.com",
-      "Male",
-      "Europe/Moscow",
-      "Russia",
-      "Airbnb",
-      "Tomsk State Pedagogical University",
-      "Sniper 2"
-    ],
-    [
-      {
-        "value": "Gerardo",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/utnihilautem.jpg?size=50x50&set=set1"
-        }
-      },
-      "Pigeram",
-      "#9f5",
-      "gpigeram8@is.gd",
-      "Male",
-      "Europe/Moscow",
-      "Russia",
-      "Uber",
-      "St. Petersburg State University of Culture and Arts",
-      "African Queen, The"
-    ],
-    [
-      {
-        "value": "Gal",
-        "attributes": {
-          "avatarUrl": "https://robohash.org/facilisvelitminima.png?size=50x50&set=set1"
-        }
-      },
-      "Sidebottom",
-      "#c8b",
-      "gsidebottom9@toplist.cz",
-      "Male",
-      "Africa/Nairobi",
-      "Kenya",
-      "Google",
-      "Maasai Mara University",
-      "Last of Sheila, The"
-    ]
-  ]
-}
+  const getData = () => {
+    // Or load your own data.
+    return fetch(
+      'https://raw.githubusercontent.com/stijlbreuk/vue-scroll-table/master/example/assets/data.json'
+    );
+  };
 
-export default {
-  name: "App",
-  components: {
-    ScrollTable
-  },
-  data() {
-    return {
-      avatarUrlColumnIndex: 10,
-      headers: data.headers,
-      rows: data.rows,
-      styles: {
-        sticky: {
-          tableHeader: {
+  export default {
+    name: 'App',
+    components: {
+      ScrollTable
+    },
+    created() {
+      getData()
+        .then(response => response.json())
+        .then(data => {
+          this.headers = data.headers;
+          this.rows = data.rows;
+        });
+    },
+    data() {
+      return {
+        avatarUrlColumnIndex: 10,
+        headers: null,
+        rows: null,
+        styles: {
+          sticky: {
+            tableHeader: {
               'font-style': 'italic'
+            }
+          }
+        },
+        classes: {
+          tableContainer: ['align-text'],
+          sticky: {
+            container: ['sticky-column'],
+            tableHeader: ['header-padding'],
+            tableData: ['table-cell']
+          },
+          scroll: {
+            tableHeader: ['header-padding'],
+            tableData: ['table-cell']
           }
         }
-      },
-      classes: {
-        tableContainer: ["align-text"],
-        sticky: {
-          container: ["sticky-column"],
-          tableHeader: ["header-padding"],
-          tableData: ["table-cell"]
-        },
-        scroll: {
-          tableHeader: ["header-padding"],
-          tableData: ["table-cell"]
-        }
-      }
-    };
-  }
-};
+      };
+    }
+  };
 </script>
 
 <style lang="scss">

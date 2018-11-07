@@ -2,7 +2,8 @@
     <div id="app">
         <h1>Vue Scroll Table</h1>
         <p>A Vue table component with fully customizable cells (using scoped slots), a sticky first column, horizontal scrolling and pagination.</p>
-        <scroll-table :headers="headers"
+        <scroll-table v-if="headers && rows"
+                      :headers="headers"
                       :data="rows"
                       :hasScroll="true"
                       :styles="styles"
@@ -29,18 +30,32 @@
 </template>
 <script>
 import ScrollTable from '../src/ScrollTable.vue';
-import data from './assets/data.json';
+
+const getData = () => {
+    // Or load your own data.
+    return fetch(
+        'https://raw.githubusercontent.com/stijlbreuk/vue-scroll-table/master/example/assets/data.json'
+    );
+};
 
 export default {
     name: 'App',
     components: {
         ScrollTable
     },
+    created() {
+        getData()
+            .then(data => data.json())
+            .then(data => {
+                this.headers = data.headers;
+                this.rows = data.rows;
+            });
+    },
     data() {
         return {
             avatarUrlColumnIndex: 10,
-            headers: data.headers,
-            rows: data.rows,
+            headers: null,
+            rows: null,
             styles: {
                 sticky: {
                     tableHeader: {
