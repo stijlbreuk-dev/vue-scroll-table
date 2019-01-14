@@ -32,7 +32,7 @@
             <div class="vst_table-overlay"
                  :class="[...mergedClasses.sticky.container]"
                  v-if="hasScroll"
-                 :style="Object.assign({'max-width': `${headers[0].width}px`}, mergedStyles.sticky.container)">
+                 :style="Object.assign({'width': `${headers[0].width}px`}, mergedStyles.sticky.container)">
                 <table-part ref="overlay"
                             @sort="sortBy($event)"
                             :classes="Object.assign(mergedClasses.sticky, mergedClasses.sortButtons)"
