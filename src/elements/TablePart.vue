@@ -7,7 +7,7 @@
                     :key="`scroll-table-part-header-${i}`"
                     @click="onHeaderClick($event, i, header.sortable)"
                     :class="[...classes.tableHeader]"
-                    :style="Object.assign({ 'width': `${header.width}px`, 'cursor': header.sortable ? 'pointer' : 'default' }, styles.tableHeader)">
+                    :style="Object.assign({ 'min-width': `${header.width}px`, 'cursor': header.sortable ? 'pointer' : 'default' }, styles.tableHeader)">
                     {{ header.text }}
                     <sort-icon v-if="header.sortable"
                                :classes="{ button: classes.button, active: classes.active}"
@@ -94,7 +94,6 @@ export default {
         border-radius: $border-radius;
         border-spacing: 0px;
         margin-bottom: 0px;
-        table-layout: fixed;
     }
 
     th,
