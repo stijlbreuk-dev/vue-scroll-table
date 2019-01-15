@@ -243,6 +243,7 @@
   }
 
   .vst_table-overlay {
+    height: 100%;
     background-color: white;
     position: absolute;
     top: 0;
