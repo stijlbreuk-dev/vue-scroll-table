@@ -166,6 +166,12 @@
         const vue = this;
 
         const sortCallback = (() => {
+          if (this.data.length === 0) {
+            return (a, b) => {
+              return 0;
+            };
+          }
+
           if (typeof this.data[0][this.sortKey] === 'object') {
             // Sort callback for row array with data objects
             return (a, b) => {
