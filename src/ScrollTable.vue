@@ -217,6 +217,9 @@
         this.sortKey = key;
       },
       handleResize() {
+        if (!this.hasScroll) {
+            return;
+        }
         this.$refs.overlay.$el.style.width = `${
           this.$refs.scroll.$el.offsetWidth
         }px`;
