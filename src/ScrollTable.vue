@@ -238,8 +238,12 @@
 
   .vst_table-container {
     width: 100%;
-    // overflow: hidden;
     position: relative;
+    &.v_has-scroll {
+      .vst_table-overlay {
+        height: calc(100% - 16px);
+      }
+    }
   }
 
   .vst_table-overlay {
