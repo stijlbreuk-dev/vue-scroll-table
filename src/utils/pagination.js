@@ -64,7 +64,6 @@ export function getPaginationButtons(totalPages, currentPage) {
     ];
   }
 
-  // TO CHECK: is it -3 or -4?
   const compare = 4;
   if (totalPages > 7 && currentPage > totalPages - compare) {
     // Variant from right
