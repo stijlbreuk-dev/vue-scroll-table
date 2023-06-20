@@ -25,21 +25,17 @@
           </option>
         </select>
       </div>
-      <div
+      <pagination
         class="vst_pagination_links"
-        :class="[...mergedClasses.pagination.links.container]"
-        :style="mergedStyles.pagination.links.container"
-      >
-        <button
-          v-for="i in pages"
-          :key="`scroll-table-pagination-link-${i}`"
-          :class="[{ s_active: i == page }, [...mergedClasses.pagination.links.buttons]]"
-          :style="mergedStyles.pagination.links.buttons"
-          @click="paginate(i)"
-        >
-          {{ i }}
-        </button>
-      </div>
+        :classes="classes"
+        :styles="styles"
+        :pages="pages"
+        :paginationClasses="mergedClasses.pagination"
+        :paginationStyles="mergedStyles.pagination"
+        :limits="limits"
+        :translations="translations"
+        @on-paginated="paginate"
+      />
     </div>
     <div
       class="vst_table-container"
@@ -105,11 +101,13 @@
 <script>
 import TablePart from './elements/TablePart.vue';
 import Loader from './elements/Loader.vue';
+import Pagination from './elements/Pagination.vue';
 
 import { mergeDefaultClasses, mergeDefaultStyle } from './config/defaults.js';
 
 export default {
   name: 'scroll-table',
+
   mounted() {
     if (this.limits.length) {
       this.limit = this.limits[0];
@@ -247,7 +245,8 @@ export default {
   },
   components: {
     TablePart,
-    Loader
+    Loader,
+    Pagination
   }
 };
 </script>
