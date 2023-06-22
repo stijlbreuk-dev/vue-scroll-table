@@ -1,6 +1,3 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
 name: Node.js Package
 
 on:
@@ -16,6 +13,8 @@ jobs:
         with:
           node-version: 10.15
       - run: npm ci
+      - run: npm run build
+      - run: cp -R dist/ package-dist/  # Copy the contents of the dist folder to a new directory named package-dist
 
   publish-npm:
     needs: build
@@ -27,7 +26,8 @@ jobs:
           node-version: 10.15
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm build
-      - run: npm publish
+      - run: echo "package-dist" > .npmignore  # Create a .npmignore file with "package-dist" as the content
+      - run: npm pack
+      - run: npm publish *.tgz
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
