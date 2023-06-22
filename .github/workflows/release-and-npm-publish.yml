@@ -26,7 +26,6 @@ jobs:
           node-version: 10.15
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: echo "package-dist" > .npmignore  # Create a .npmignore file with "package-dist" as the content
       - run: npm pack
       - run: npm publish *.tgz
         env:
