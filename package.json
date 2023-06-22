@@ -1,6 +1,6 @@
 {
   "name": "vue-scroll-table",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A Vue table component with fully customizable cells (using scoped slots), a sticky first column, horizontal scrolling and pagination.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
