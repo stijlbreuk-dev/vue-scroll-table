@@ -31,6 +31,6 @@ jobs:
 
       - name: Unpublish NPM package version
         run: |
-          npm view ${{ env.package_name }}@${{ github.event.inputs.npm_version }} > package.json
+          npm show ${{ env.package_name }}@${{ github.event.inputs.npm_version }} > package-info.txt
           npm publish --dry-run
           npm unpublish ${{ env.package_name }}@${{ github.event.inputs.npm_version }} --force
