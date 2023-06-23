@@ -24,7 +24,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2  # Fetch the repository again to include the downloaded artifact
       - uses: actions/setup-node@v3
         with:
           node-version: 10.15
@@ -33,7 +33,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
-      - run: ls dist
+      - run: ls
       - run: |
           if [ ! -d "dist" ]; then
             echo "Error: dist folder does not exist"
