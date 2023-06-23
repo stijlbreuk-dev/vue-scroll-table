@@ -24,4 +24,4 @@ jobs:
         run: |
           npm install -g npm@latest
           echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          npm unpublish your-package@${{ github.event.inputs.npm_version }} --force
+          npm unpublish vue-scroll-table@${{ github.event.inputs.npm_version }} --force
