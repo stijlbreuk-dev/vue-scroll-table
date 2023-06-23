@@ -18,13 +18,13 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: ./dist
+          path: dist/
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2  # Fetch the repository again to include the downloaded artifact
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 10.15
@@ -33,12 +33,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
-      - run: ls
-      - run: |
-          if [ ! -d "dist" ]; then
-            echo "Error: dist folder does not exist"
-            exit 1
-          fi
+      - run: mkdir dist
+      - run: mv dist-*/* dist
+      - run: ls dist
       - run: npm ci
       - run: npm publish
         env:
