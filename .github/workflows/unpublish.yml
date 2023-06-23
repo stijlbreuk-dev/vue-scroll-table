@@ -22,11 +22,6 @@ jobs:
 
       - name: Unpublish NPM package
         run: |
-          # Install NPM CLI
           npm install -g npm@latest
-
-          # Log in to NPM registry
           echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-          # Unpublish the specified version
           npm unpublish your-package@${{ github.event.inputs.npm_version }} --force
