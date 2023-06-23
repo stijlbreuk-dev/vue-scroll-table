@@ -20,8 +20,18 @@ jobs:
         with:
           node-version: 14
 
+      - name: Print NPM package version
+        run: echo "NPM package version: ${{ github.event.inputs.npm_version }}"
+
+      - name: Install NPM CLI
+        run: npm install -g npm@latest
+
+      - name: Log in to NPM registry
+        run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       - name: Unpublish NPM package
-        run: |
-          npm install -g npm@latest
-          echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          npm unpublish vue-scroll-table@${{ github.event.inputs.npm_version }} --force
+        id: unpublish
+        run: npm unpublish your-package@${{ github.event.inputs.npm_version }} --force | tee unpublish.log
+
+      - name: Display unpublish log
+        run: cat unpublish.log
