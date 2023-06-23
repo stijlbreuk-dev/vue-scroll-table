@@ -6,27 +6,8 @@ on:
       npm_version:
         description: 'NPM package version'
         required: true
+
 jobs:
-  deprecate:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-
-      - name: Deprecate NPM package version
-        run: |
-          # Log in to NPM registry
-          echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-          # Deprecate the specified version
-          npm deprecate vue-scroll-table@${{ github.event.inputs.npm_version }} "This version is deprecated, please upgrade to the latest version."
-          
   unpublish:
     runs-on: ubuntu-latest
 
@@ -39,19 +20,14 @@ jobs:
         with:
           node-version: 14
 
-      - name: Print NPM package version
-        run: |
-          echo "NPM package version: ${{ github.event.inputs.npm_version }}"
-
       - name: Install NPM CLI
         run: npm install -g npm@latest
 
       - name: Log in to NPM registry
         run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-      - name: Unpublish NPM package
-        id: unpublish
-        run: npm unpublish vue-scroll-table@${{ github.event.inputs.npm_version }} --force | tee unpublish.log
-
-      - name: Display unpublish log
-        run: cat unpublish.log
+      - name: Unpublish NPM package version
+        run: |
+          npm view your-package@${{ github.event.inputs.npm_version }} > package.json
+          npm publish --dry-run
+          npm unpublish your-package@${{ github.event.inputs.npm_version }} --force
