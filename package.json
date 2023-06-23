@@ -16,6 +16,9 @@
   "browser": {
     "./sfc": "src/ScrollTable.vue"
   },
+  "files": [
+    "dist"
+  ],
   "author": "Jeroen Peerbolte <jeroen@stijlbreuk.nl>",
   "repository": {
     "type": "git",
