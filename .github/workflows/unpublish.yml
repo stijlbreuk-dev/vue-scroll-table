@@ -7,6 +7,26 @@ on:
         description: 'NPM package version'
         required: true
 jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Deprecate NPM package version
+        run: |
+          # Log in to NPM registry
+          echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+          # Deprecate the specified version
+          npm deprecate vue-scroll-table@${{ github.event.inputs.npm_version }} "This version is deprecated, please upgrade to the latest version."
+          
   unpublish:
     runs-on: ubuntu-latest
 
