@@ -34,7 +34,7 @@ jobs:
         with:
           name: dist
       - run: mkdir dist
-      - run: mv dist-*/* dist
+      - run: mv vue-scroll-table.* dist/
       - run: ls dist
       - run: npm ci
       - run: npm publish
