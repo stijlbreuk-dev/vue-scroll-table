@@ -1,4 +1,4 @@
-name: Unpublish NPM Package Version
+name: Deprecate NPM Package Version
 
 on:
   workflow_dispatch:
@@ -6,12 +6,15 @@ on:
       npm_version:
         description: 'NPM package version'
         required: true
+      next_version_template:
+        description: 'Template for minimum working next version'
+        required: true
 
 env:
   package_name: vue-scroll-table
 
 jobs:
-  unpublish:
+  deprecate:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,8 +32,8 @@ jobs:
       - name: Log in to NPM registry
         run: echo "//registry.npmjs.org/:_authToken=\${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-      - name: Unpublish NPM package version
+      - name: Deprecate NPM package version
         run: |
-          npm show ${{ env.package_name }}@${{ github.event.inputs.npm_version }} > package-info.txt
-          npm publish --dry-run
-          npm unpublish ${{ env.package_name }}@${{ github.event.inputs.npm_version }} --force
+          next_version_template="${{ github.event.inputs.next_version_template }}"
+          next_version="$(printf "$next_version_template" ${{ github.event.inputs.npm_version }})"
+          npm deprecate ${{ env.package_name }}@${{ github.event.inputs.npm_version }} "This version is deprecated, please upgrade to $next_version."
