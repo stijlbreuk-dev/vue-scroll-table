@@ -14,7 +14,11 @@ jobs:
           node-version: 10.15
       - run: npm ci
       - run: npm run build
-      - run: cp -R dist/ package-dist/  # Copy the contents of the dist folder to a new directory named package-dist
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
 
   publish-npm:
     needs: build
@@ -25,8 +29,11 @@ jobs:
         with:
           node-version: 10.15
           registry-url: https://registry.npmjs.org/
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
       - run: npm ci
-      - run: npm pack
-      - run: npm publish *.tgz --dry-run
+      - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}
