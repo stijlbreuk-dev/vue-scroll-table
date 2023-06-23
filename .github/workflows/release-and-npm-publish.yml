@@ -33,6 +33,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
+      - run: ls dist
+      - run: |
+          if [ ! -d "dist" ]; then
+            echo "Error: dist folder does not exist"
+            exit 1
+          fi
       - run: npm ci
       - run: npm publish
         env:
