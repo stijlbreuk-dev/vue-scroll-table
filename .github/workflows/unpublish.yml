@@ -6,7 +6,6 @@ on:
       npm_version:
         description: 'NPM package version'
         required: true
-
 jobs:
   unpublish:
     runs-on: ubuntu-latest
@@ -21,7 +20,8 @@ jobs:
           node-version: 14
 
       - name: Print NPM package version
-        run: echo "NPM package version: ${{ github.event.inputs.npm_version }}"
+        run: |
+          echo "NPM package version: ${{ github.event.inputs.npm_version }}"
 
       - name: Install NPM CLI
         run: npm install -g npm@latest
@@ -31,7 +31,7 @@ jobs:
 
       - name: Unpublish NPM package
         id: unpublish
-        run: npm unpublish your-package@${{ github.event.inputs.npm_version }} --force | tee unpublish.log
+        run: npm unpublish vue-scroll-table@${{ github.event.inputs.npm_version }} --force | tee unpublish.log
 
       - name: Display unpublish log
         run: cat unpublish.log
